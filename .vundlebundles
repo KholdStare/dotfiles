@@ -1,0 +1,62 @@
+set nocompatible
+filetype off                   " required!
+
+let g:vundle_default_git_proto = "ssh"
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-abolish'
+Bundle 'coderifous/textobj-word-column.vim'
+Bundle 'tpope/vim-repeat'
+Bundle 'SirVer/ultisnips'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'yurifury/hexHighlight'
+
+" Colorscheme
+Bundle 'tomasr/molokai'
+
+" vim-scripts repos
+Bundle 'NERD_tree-Project'
+" Bundle 'FindFile'
+Bundle 'xoria256.vim'
+" For automatically marking scripts as executable
+Bundle 'Shebang'
+" Bundle 'eclim'
+Bundle 'bufkill.vim'
+Bundle 'vcscommand.vim'
+
+ " Dummy entry for CommandT
+Bundle 'CommandTVimball'
+Bundle 'OmniCppComplete'
+Bundle 'pythoncomplete'
+Bundle 'taglist.vim'
+Bundle 'a.vim'
+
+" non github repos
+
+" ...
+
+filetype plugin indent on     " required! 
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
