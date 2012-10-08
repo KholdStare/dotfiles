@@ -193,6 +193,10 @@ if has("autocmd")
 endif
 set completeopt=longest,menuone
 
+" Command-T settings
+let g:CommandTMaxFiles=30000
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
+
 "-----------------------------------------------------------------------------
 " Set up autocommands
 "-----------------------------------------------------------------------------
