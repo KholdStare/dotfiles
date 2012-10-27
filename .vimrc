@@ -1,19 +1,25 @@
 set mouse=a
 set number
 
+"-----------------------------------------------------------------------------
+" Haskell
+"-----------------------------------------------------------------------------
+let g:haddock_browser="/usr/bin/firefox"
+let maplocalleader = "_"
 
-" vundle stuff ============================
+"-----------------------------------------------------------------------------
+" Vundle
+"-----------------------------------------------------------------------------
 source ~/.vundlebundles
 
+"-----------------------------------------------------------------------------
+" General
+"-----------------------------------------------------------------------------
 " Necessary to show unicode glyphs
 set encoding=utf-8
 
 " Colorscheme
 colorscheme xoria256
-" let g:molokai_original=1
-" colorscheme molokai
-" set background=dark
-" colorscheme solarized
 
 " Indentation stuff
 set autoindent
@@ -79,8 +85,8 @@ set backspace=indent,eol,start
 " "press <Enter> to continue"
 set cmdheight=2
 
-" Set the status line the way i like it
-set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
+" Set the status line the way i like it (disabled now because of powerline)
+" set stl=%f\ %m\ %r\ Line:%l/%L[%p%%]\ Col:%c\ Buf:%n\ [%b][0x%B]
 
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
@@ -204,7 +210,13 @@ set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
 if has("autocmd")
     autocmd! bufwritepost .vimrc source $MYVIMRC
 	autocmd FileType python set omnifunc=pythoncomplete#Complete
+    au Bufenter *.hs compiler ghc
 endif
+
+"-----------------------------------------------------------------------------
+" Syntastic
+"-----------------------------------------------------------------------------
+let g:syntastic_cpp_compiler_options = ' -std=c++11'
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
@@ -220,12 +232,7 @@ if has("gui_running")
     set guioptions+=LlRrb
     set guioptions-=LlRrb
 
-    " set gfn=Courier\ New\ 12
-    " set gfn=DejaVu\ Sans\ Mono\ 12
-    " set gfn=Droid\ Sans\ Mono\ 12
     set gfn=Inconsolata\ 12
-    " set gfn=monofur\ 14
-    " colorscheme xoria256
     if !exists("g:vimrcloaded")
         winpos 0 0
         winsize 130 100

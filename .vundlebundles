@@ -1,8 +1,6 @@
 set nocompatible
 filetype off                   " required!
 
-let g:vundle_default_git_proto = "ssh"
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -15,7 +13,7 @@ Bundle 'gmarik/vundle'
 " original repos on github
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'altercation/vim-colors-solarized'
+Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -27,15 +25,11 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'yurifury/hexHighlight'
 
 " Colorscheme
-Bundle 'tomasr/molokai'
-
-" vim-scripts repos
-Bundle 'NERD_tree-Project'
-" Bundle 'FindFile'
 Bundle 'xoria256.vim'
+
+Bundle 'NERD_tree-Project'
 " For automatically marking scripts as executable
 Bundle 'Shebang'
-" Bundle 'eclim'
 Bundle 'bufkill.vim'
 Bundle 'vcscommand.vim'
 
@@ -46,9 +40,9 @@ Bundle 'pythoncomplete'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
 
-" non github repos
+" haskell
+Bundle 'lukerandall/haskellmode-vim'
 
-" ...
 
 filetype plugin indent on     " required! 
 "
