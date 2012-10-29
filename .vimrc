@@ -21,14 +21,6 @@ set encoding=utf-8
 " Colorscheme
 colorscheme xoria256
 
-" Indentation stuff
-set autoindent
-set smartindent
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-filetype indent plugin on
 filetype detect
 
 " Virtual Editing mode 
@@ -59,12 +51,6 @@ set nowrap
 " if we do wrap, split on words rather than characters
 set linebreak
 
-" Shortcut to rapidly toggle `set list`
-nmap <leader>l :set list!<CR>
- 
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
 " cursor position
 set ruler
 
@@ -77,9 +63,6 @@ nnoremap <C-y> 3<C-y>
 
 " Show partial commands in the last line of the screen
 set showcmd
-
-" Allow backspacing over autoindent, line breaks and start of insert action
-set backspace=indent,eol,start
 
 " Set the command window height to 2 lines, to avoid many cases of having to
 " "press <Enter> to continue"
@@ -153,6 +136,29 @@ nnoremap k gk
 
 " ultisnips snippet location
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
+"-----------------------------------------------------------------------------
+" Indentation
+"-----------------------------------------------------------------------------
+set autoindent
+set smartindent
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+filetype indent plugin on
+
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
+
+" Allow backspacing over autoindent, line breaks and start of insert action
+set backspace=indent,eol,start
+
+if has("autocmd")
+    autocmd BufNewFile,BufRead *.cpp set formatprg=astyle\ -YpyJk1
+endif
 
 "-----------------------------------------------------------------------------
 " Custom mappings for plugins
@@ -177,8 +183,8 @@ map <F7> :TlistToggle<CR>
 nnoremap gs :A<CR>
 
 " Find Uses
-nmap <leader>fu yiw:vimgrep " ./**/*.c
-vmap <leader>fu y:vimgrep " ./**/*.c
+nmap <leader>fu yiw:vimgrep /"/ ./**/*.c
+vmap <leader>fu y:vimgrep /"/ ./**/*.c
 
 " Quick replace 
 nmap <leader>r yiw:%s/"//gODOD
@@ -201,7 +207,7 @@ set completeopt=longest,menuone
 
 " Command-T settings
 let g:CommandTMaxFiles=30000
-set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
+set wildignore+=*.o,*.obj,*.d,*.out,.git,CVS,.svn
 
 "-----------------------------------------------------------------------------
 " Set up autocommands
@@ -217,6 +223,7 @@ endif
 " Syntastic
 "-----------------------------------------------------------------------------
 let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_cpp_compiler = 'g++-4.7'
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
