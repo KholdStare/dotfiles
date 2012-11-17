@@ -130,6 +130,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" Keep selection after indenting
+vnoremap > >gv
+vnoremap < <gv
+
 " Movement default gj and gk
 nnoremap j gj
 nnoremap k gk
