@@ -221,6 +221,10 @@ if has("autocmd")
     autocmd! bufwritepost .vimrc source $MYVIMRC
 	autocmd FileType python set omnifunc=pythoncomplete#Complete
     au Bufenter *.hs compiler ghc
+    " OpenCL filetype detection
+    au BufRead,BufNewFile *.cl set filetype=opencl
+    " OpenCL filetype detection
+    au BufRead,BufNewFile SConstruct set filetype=python
 endif
 
 "-----------------------------------------------------------------------------
