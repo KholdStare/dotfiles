@@ -211,7 +211,7 @@ set completeopt=longest,menuone
 
 " Command-T settings
 let g:CommandTMaxFiles=30000
-set wildignore+=*.o,*.obj,*.d,*.out,.git,CVS,.svn
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
 
 "-----------------------------------------------------------------------------
 " Set up autocommands
@@ -230,8 +230,9 @@ endif
 "-----------------------------------------------------------------------------
 " Syntastic
 "-----------------------------------------------------------------------------
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++11'
 let g:syntastic_cpp_compiler = 'g++-4.7'
+let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
 
 "-----------------------------------------------------------------------------
 " Set up the window colors and size
