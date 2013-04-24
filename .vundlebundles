@@ -23,6 +23,7 @@ Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'yurifury/hexHighlight'
+Bundle 'mattn/gist-vim'
 
 " Colorscheme
 Bundle 'xoria256.vim'
