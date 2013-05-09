@@ -235,6 +235,13 @@ let g:syntastic_cpp_compiler = 'g++-4.7'
 let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
 
 "-----------------------------------------------------------------------------
+" Custom local vimrc
+"-----------------------------------------------------------------------------
+if filereadable(".custom.vim")
+    so .custom.vim
+endif
+
+"-----------------------------------------------------------------------------
 " Set up the window colors and size
 "-----------------------------------------------------------------------------
 if has("gui_running")
