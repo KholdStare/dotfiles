@@ -29,4 +29,12 @@
 [branch "master"]
 	remote = origin
 	merge = refs/heads/master
+[alias]
+# some alises described in http://blog.apiaxle.com/post/handy-git-tips-to-stop-you-getting-fired/
+	snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+	assume   = update-index --assume-unchanged
+	unassume = update-index --no-assume-unchanged
+	assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+[diff]
+	algorithm = patience
 
