@@ -1,2 +1,5 @@
-:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\""
+:def hoogle \x -> return $ ":!hoogle \"" ++ x ++ "\" | head -n 20"
 :def doc \x -> return $ ":!hoogle --info \"" ++ x ++ "\""
+
+-- Describe types of bound values
+:set +t
