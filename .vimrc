@@ -23,9 +23,6 @@ colorscheme xoria256
 
 filetype detect
 
-" Virtual Editing mode 
-set virtualedit=block
-
 " Better command-line completion
 set wildmenu
 " shell style completion
@@ -54,13 +51,6 @@ set linebreak
 " cursor position
 set ruler
 
-" scroll with the cursor if its within 3 lines of the edge
-set scrolloff=3
-
-" slightly faster scrolling
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
 " Show partial commands in the last line of the screen
 set showcmd
 
@@ -74,8 +64,8 @@ set cmdheight=2
 " tell VIM to always put a status line in, even if there is only one window
 set laststatus=2
 
-" Use <F11> to toggle between 'paste' and 'nopaste'
-set pastetoggle=<F11>
+" Toggle between 'paste' and 'nopaste' using F2
+set pastetoggle=<F2>
 
 " Highlight when searching
 set hlsearch
@@ -86,10 +76,6 @@ set ofu=syntaxcomplete#Complete
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <leader>hc :nohl<CR><C-L>
-
-" swap tilde and apostrophe, for better mark navigation
-nnoremap ' `
-nnoremap ` '
 
 " keep longer history
 set history=1000
@@ -117,13 +103,20 @@ vnoremap <silent> # :<C-U>
   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
   \gV:call setreg('"', old_reg, old_regtype)<CR>
 
-" Exuberant Ctags preferences
+"-----------------------------------------------------------------------------
+" Tag preferences
+"-----------------------------------------------------------------------------
 set tags=./tags;/
+" Show list of possible tags if more than one,
+" otherwise jump directly
 nnoremap <C-]> g<C-]>
 
 " Use Ctrl-space Ctrl-space to look up usage using cscope
 nmap <C-@><C-@> :cs find s <C-R>=expand("<cword>")<CR><CR>
-  
+
+"-----------------------------------------------------------------------------
+" Movement preferences
+"-----------------------------------------------------------------------------
 " Window movement command mapping
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
@@ -138,8 +131,20 @@ vnoremap < <gv
 nnoremap j gj
 nnoremap k gk
 
-" ultisnips snippet location
-let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
+" slightly faster scrolling
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+" scroll with the cursor if its within 3 lines of the edge
+set scrolloff=3
+
+" swap tilde and apostrophe, for better mark navigation
+nnoremap ' `
+nnoremap ` '
+
+" Virtual Editing mode 
+set virtualedit=block
+
 "-----------------------------------------------------------------------------
 " Indentation
 "-----------------------------------------------------------------------------
@@ -160,16 +165,9 @@ set listchars=tab:▸\ ,eol:¬
 " Allow backspacing over autoindent, line breaks and start of insert action
 set backspace=indent,eol,start
 
-if has("autocmd")
-    autocmd BufNewFile,BufRead *.cpp set formatprg=astyle\ -YpyJk1
-endif
-
 "-----------------------------------------------------------------------------
 " Custom mappings for plugins
 "-----------------------------------------------------------------------------
-
-" Use unicode symbols for powerline
-let g:Powerline_symbols="unicode"
 
 " Bubble single lines
 nmap <C-Up> [e
@@ -194,25 +192,6 @@ vmap <leader>fu y:vimgrep /"/ ./**/*.c
 nmap <leader>r yiw:%s/"//gODOD
 vmap <leader>r y:%s/"//gODOD
 
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-if has("autocmd")
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-endif
-set completeopt=longest,menuone
-
-" Command-T settings
-let g:CommandTMaxFiles=30000
-set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
-
 "-----------------------------------------------------------------------------
 " Set up autocommands
 "-----------------------------------------------------------------------------
@@ -232,11 +211,37 @@ if has("autocmd")
 endif
 
 "-----------------------------------------------------------------------------
-" Syntastic
+" Plugin preferences
 "-----------------------------------------------------------------------------
+" Syntastic
 let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++11'
 let g:syntastic_cpp_compiler = 'g++-4.7'
 let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
+
+" ultisnips snippet location
+let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
+
+" Command-T settings
+let g:CommandTMaxFiles=30000
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
+
+" Use unicode symbols for powerline
+let g:Powerline_symbols="unicode"
+
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+if has("autocmd")
+    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+endif
+set completeopt=longest,menuone
 
 "-----------------------------------------------------------------------------
 " Custom local vimrc
