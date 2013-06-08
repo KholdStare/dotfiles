@@ -219,12 +219,16 @@ set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
 " Source the vimrc file after saving it
 if has("autocmd")
     autocmd! bufwritepost .vimrc source $MYVIMRC
-	autocmd FileType python set omnifunc=pythoncomplete#Complete
+    autocmd FileType python set omnifunc=pythoncomplete#Complete
     au Bufenter *.hs compiler ghc
     " OpenCL filetype detection
     au BufRead,BufNewFile *.cl set filetype=opencl
     " OpenCL filetype detection
     au BufRead,BufNewFile SConstruct set filetype=python
+    
+    " Tcl
+    autocmd FileType tcl syntax region tclBlock start="{" end="}" transparent fold
+    autocmd FileType tcl set foldnestmax=5
 endif
 
 "-----------------------------------------------------------------------------
