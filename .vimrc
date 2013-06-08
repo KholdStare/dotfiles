@@ -223,7 +223,7 @@ if has("autocmd")
     au Bufenter *.hs compiler ghc
     " OpenCL filetype detection
     au BufRead,BufNewFile *.cl set filetype=opencl
-    " OpenCL filetype detection
+    " SConstruct filetype detection
     au BufRead,BufNewFile SConstruct set filetype=python
     
     " Tcl
