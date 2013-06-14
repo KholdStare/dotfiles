@@ -171,6 +171,14 @@ set listchars=tab:▸\ ,eol:¬
 set backspace=indent,eol,start
 
 "-----------------------------------------------------------------------------
+" Line Endings
+"-----------------------------------------------------------------------------
+" Prefer dos line endings on cygwin in windows
+if has('win32unix')
+  set fileformats=dos,unix
+endif
+
+"-----------------------------------------------------------------------------
 " Custom mappings for plugins
 "-----------------------------------------------------------------------------
 
