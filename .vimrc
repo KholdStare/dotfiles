@@ -106,7 +106,12 @@ vnoremap <silent> # :<C-U>
 "-----------------------------------------------------------------------------
 " Tag preferences
 "-----------------------------------------------------------------------------
-set tags=./tags;/
+" Add any global tags (for libraries)
+let global_tags_dir='~/dotfiles/.global-tags'
+let &tags = join(split(globpath(global_tags_dir, '**/tags'), '\n'), ',')
+" default tags
+set tags+=./tags;/
+
 " Show list of possible tags if more than one,
 " otherwise jump directly
 nnoremap <C-]> g<C-]>
@@ -244,10 +249,16 @@ endif
 set completeopt=longest,menuone
 
 "-----------------------------------------------------------------------------
-" Custom local vimrc
+" Custom settings depending on local environment
 "-----------------------------------------------------------------------------
+" extra custom vim settings
 if filereadable(".custom.vim")
     so .custom.vim
+endif
+
+" Use scons
+if filereadable("SConstruct")
+    set makeprg=scons
 endif
 
 "-----------------------------------------------------------------------------
