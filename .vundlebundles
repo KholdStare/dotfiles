@@ -42,6 +42,7 @@ Bundle 'OmniCppComplete'
 Bundle 'pythoncomplete'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
+Bundle 'opencl.vim'
 
 " haskell
 Bundle 'lukerandall/haskellmode-vim'
