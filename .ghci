@@ -3,3 +3,4 @@
 
 -- Describe types of bound values
 :set +t
+:set stop :list
