@@ -236,7 +236,7 @@ let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
 
 " Command-T settings
 let g:CommandTMaxFiles=30000
-set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs
 
 " Use unicode symbols for powerline
 let g:Powerline_symbols="unicode"
