@@ -1,5 +1,5 @@
-:def hoogle \x -> return $ ":!hoogle --color --count 20 \"" ++ x ++ "\""
-:def doc \x -> return $ ":!hoogle --color --info \"" ++ x ++ "\""
+:def! hoogle \x -> return $ ":!hoogle --color --count 20 \"" ++ x ++ "\""
+:def! doc \x -> return $ ":!hoogle --color --info \"" ++ x ++ "\""
 
 -- Describe types of bound values
 :set +t
