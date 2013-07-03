@@ -1,6 +1,8 @@
 set nocompatible
 filetype off                   " required!
 
+let g:vundle_default_git_proto="git"
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -23,6 +25,7 @@ Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'yurifury/hexHighlight'
+Bundle 'mattn/gist-vim'
 
 " Colorscheme
 Bundle 'xoria256.vim'
@@ -39,6 +42,7 @@ Bundle 'OmniCppComplete'
 Bundle 'pythoncomplete'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
+Bundle 'opencl.vim'
 
 " haskell
 Bundle 'lukerandall/haskellmode-vim'
