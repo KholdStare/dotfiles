@@ -10,6 +10,7 @@ let maplocalleader = "_"
 "-----------------------------------------------------------------------------
 " Vundle
 "-----------------------------------------------------------------------------
+let g:vundle_default_git_proto="git"
 source ~/.vundlebundles
 
 "-----------------------------------------------------------------------------
@@ -217,12 +218,15 @@ if has("autocmd")
     autocmd! bufwritepost .vimrc source $MYVIMRC
 	autocmd FileType python set omnifunc=pythoncomplete#Complete
     au Bufenter *.hs compiler ghc
+
+    " Tcl
+    autocmd FileType tcl syntax region tclBlock start="{" end="}" transparent fold
 endif
 
 "-----------------------------------------------------------------------------
 " Syntastic
 "-----------------------------------------------------------------------------
-let g:syntastic_cpp_compiler_options = ' -std=c++11'
+let g:syntastic_cpp_compiler_options = ' -std=c++0x'
 let g:syntastic_cpp_compiler = 'g++-4.7'
 
 "-----------------------------------------------------------------------------
