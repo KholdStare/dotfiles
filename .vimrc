@@ -203,8 +203,8 @@ nmap <leader>fu yiw:vimgrep /"/ ./**/*.c
 vmap <leader>fu y:vimgrep /"/ ./**/*.c
 
 " Quick replace 
-nmap <leader>r yiw:%s/"//gODOD
-vmap <leader>r y:%s/"//gODOD
+nmap <leader>r yiw:%s/"//g<Left><Left>
+vmap <leader>r y:%s/"//g<Left><Left>
 
 "-----------------------------------------------------------------------------
 " Set up autocommands
