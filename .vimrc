@@ -4,7 +4,7 @@ set number
 "-----------------------------------------------------------------------------
 " Haskell
 "-----------------------------------------------------------------------------
-let g:haddock_browser="/usr/bin/firefox"
+let g:haddock_browser="/usr/bin/chromium-browser"
 let maplocalleader = "_"
 
 "-----------------------------------------------------------------------------
@@ -213,7 +213,6 @@ vmap <leader>r y:%s/"//g<Left><Left>
 if has("autocmd")
     autocmd! bufwritepost .vimrc source $MYVIMRC
     autocmd FileType python set omnifunc=pythoncomplete#Complete
-    au Bufenter *.hs compiler ghc
     " OpenCL filetype detection
     au BufRead,BufNewFile *.cl set filetype=opencl
     " SConstruct filetype detection

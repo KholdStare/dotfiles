@@ -13,9 +13,12 @@ Bundle 'gmarik/vundle'
 " My Bundles here:
 "
 " original repos on github
+Bundle 'Shougo/vimproc'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
+" dont want this to override defaults!
+" Bundle 'derekwyatt/vim-scala'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -45,7 +48,7 @@ Bundle 'a.vim'
 Bundle 'opencl.vim'
 
 " haskell
-Bundle 'lukerandall/haskellmode-vim'
+Bundle 'eagletmt/ghcmod-vim'
 
 
 filetype plugin indent on     " required! 
