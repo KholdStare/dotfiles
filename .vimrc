@@ -24,6 +24,9 @@ colorscheme xoria256
 
 filetype detect
 
+" Enable syntax highlighting detection
+syntax on
+
 " Better command-line completion
 set wildmenu
 " shell style completion
@@ -84,8 +87,11 @@ set history=1000
 " enable extended % matching
 runtime macros/matchit.vim
 
-syntax on
+" Keep buffer open even if not visible
+" prevents prompts to save file when opening new ones
 set hidden
+
+" Show matching bracket when cursor is on it
 set showmatch
 
 " Automatic folding
@@ -162,7 +168,7 @@ set softtabstop=4
 set shiftwidth=4
 filetype indent plugin on
 
-" Shortcut to rapidly toggle `set list`
+" Shortcut to rapidly toggle `set list` for looking at indentation
 nmap <leader>l :set list!<CR>
  
 " Use the same symbols as TextMate for tabstops and EOLs
