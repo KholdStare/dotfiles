@@ -2,12 +2,6 @@ set mouse=a
 set number
 
 "-----------------------------------------------------------------------------
-" Haskell
-"-----------------------------------------------------------------------------
-let g:haddock_browser="/usr/bin/chromium-browser"
-let maplocalleader = "_"
-
-"-----------------------------------------------------------------------------
 " Vundle
 "-----------------------------------------------------------------------------
 let g:vundle_default_git_proto="git"
@@ -255,6 +249,12 @@ if has("autocmd")
     au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 endif
 set completeopt=longest,menuone
+
+"-----------------------------------------------------------------------------
+" Haskell
+"-----------------------------------------------------------------------------
+let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds'
+let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
 
 "-----------------------------------------------------------------------------
 " Custom settings depending on local environment
