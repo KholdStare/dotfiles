@@ -2,7 +2,7 @@
 # creates links in the parent directory to all dotfiles in this directory.
 # HAS to be run in this directory
 
-FILES=".gitconfig .git_template .tmux.conf .vimrc .vundlebundles .ghci"
+FILES=".gitconfig .git_template .tmux.conf .vimrc .vundlebundles .ghci .neco-rc.vim"
 
 for file in $FILES; do ln -s dotfiles/$file ../$file; done
 
