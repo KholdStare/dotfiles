@@ -34,11 +34,6 @@ nnoremap gs :A<CR>
 " Colorscheme
 colorscheme xoria256
 
-" Syntastic
-let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++0x'
-let g:syntastic_cpp_compiler = 'g++-4.7'
-let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
-
 " ultisnips snippet location
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
 
@@ -71,6 +66,15 @@ source ~/dotfiles/.neco-rc.vim
 "-----------------------------------------------------------------------------
 " Haskell
 "-----------------------------------------------------------------------------
+" Syntastic
+"-----------------------------------------------------------------------------
+
+" C++
+let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++0x'
+let g:syntastic_cpp_compiler = 'g++-4.7'
+let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
+
+" Haskell
 let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds'
 let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
 
