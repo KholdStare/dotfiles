@@ -10,12 +10,13 @@ call vundle#rc()
 " required! 
 Bundle 'gmarik/vundle'
 
-" My Bundles here:
-"
-" original repos on github
+" By the power of Shougo!
 Bundle 'Shougo/vimproc'
+Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neocomplete.vim'
-Bundle 'eagletmt/neco-ghc'
+Bundle 'Shougo/unite-outline'
+Bundle 'Shougo/unite-help'
+
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
@@ -26,6 +27,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-abolish'
+
 Bundle 'coderifous/textobj-word-column.vim'
 Bundle 'SirVer/ultisnips'
 Bundle 'Lokaltog/vim-powerline'
@@ -35,21 +37,19 @@ Bundle 'mattn/gist-vim'
 " Colorscheme
 Bundle 'xoria256.vim'
 
-Bundle 'NERD_tree-Project'
 " For automatically marking scripts as executable
 Bundle 'Shebang'
 Bundle 'bufkill.vim'
 Bundle 'vcscommand.vim'
 
- " Dummy entry for CommandT
-Bundle 'CommandTVimball'
-Bundle 'OmniCppComplete'
-Bundle 'pythoncomplete'
+"Bundle 'OmniCppComplete'
+"Bundle 'pythoncomplete'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
 Bundle 'opencl.vim'
 
 " haskell
+Bundle 'eagletmt/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
 
 
