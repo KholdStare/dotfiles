@@ -23,7 +23,6 @@
 	email = kholdstare0.0@gmail.com
 [github]
 	user = KholdStare
-	token = 824dbb9cb60534d562331328df67cfa2
 [init]
 	templatedir = ~/.git_template
 [branch "master"]
