@@ -69,7 +69,6 @@ set hlsearch
 set ofu=syntaxcomplete#Complete
 set completeopt=longest,menuone
 
-
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
 nnoremap <leader>hc :nohl<CR><C-L>
@@ -90,18 +89,6 @@ set showmatch
 " Automatic folding
 set foldmethod=syntax
 set foldnestmax=2
-
-" Search for selected text, forwards or backwards.
-vnoremap <silent> * :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
-vnoremap <silent> # :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gV:call setreg('"', old_reg, old_regtype)<CR>
 
 "-----------------------------------------------------------------------------
 " Tag preferences
@@ -190,6 +177,19 @@ vmap <leader>fu y:vimgrep /"/ ./**/*.c
 nmap <leader>r yiw:%s/"//g<Left><Left>
 vmap <leader>r y:%s/"//g<Left><Left>
 
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gV:call setreg('"', old_reg, old_regtype)<CR>
+
+
 "-----------------------------------------------------------------------------
 " Set up autocommands
 "-----------------------------------------------------------------------------
@@ -197,9 +197,9 @@ if has("autocmd")
     " Source the vimrc file after saving it
     autocmd! bufwritepost .vimrc source $MYVIMRC
     " OpenCL filetype detection
-    au BufRead,BufNewFile *.cl set filetype=opencl
+    autocmd! BufRead,BufNewFile *.cl set filetype=opencl
     " SConstruct filetype detection
-    au BufRead,BufNewFile SConstruct set filetype=python
+    autocmd! BufRead,BufNewFile SConstruct set filetype=python
 endif
 
 "-----------------------------------------------------------------------------
