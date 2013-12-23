@@ -28,6 +28,11 @@ map <F7> :TlistToggle<CR>
 " mnemonic: Go Switch
 nnoremap gs :A<CR>
 
+" Insert type for haskell function definition
+nnoremap <Leader>ht :GhcModTypeInsert<CR>
+nnoremap <Leader>he :GhcModType<CR>
+nnoremap <leader>hc :nohl<CR>:GhcModTypeClear<CR><C-L>
+
 "-----------------------------------------------------------------------------
 " Plugin preferences
 "-----------------------------------------------------------------------------
@@ -78,7 +83,7 @@ let g:syntastic_cpp_compiler = 'g++-4.7'
 let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
 
 " Haskell
-let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds'
+let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds -g -fwarn-incomplete-patterns'
 let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
 
 
