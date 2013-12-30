@@ -51,6 +51,7 @@ Bundle 'opencl.vim'
 " haskell
 Bundle 'eagletmt/neco-ghc'
 Bundle 'eagletmt/ghcmod-vim'
+Bundle 'Twinside/vim-haskellConceal'
 
 
 filetype plugin indent on     " required! 
