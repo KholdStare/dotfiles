@@ -4,6 +4,11 @@
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#set_profile('files', 'smartcase', 1)
+
+" Handle large directories
+let g:unite_source_file_rec_max_cache_files = 0
+call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate', 'max_candidates', 0)
+
 let g:unite_enable_start_insert=1
 let g:unite_source_history_yank_enable=1
 let g:unite_cursor_line_highlight = 'TabLineSel'
