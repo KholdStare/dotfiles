@@ -21,7 +21,7 @@ set wildmenu
 " set wildmode=list:longest
 
 " Ignore intermediates and source control in wildcard searches
-set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs,*.hi
 
 " disable using alt modifier for accessing window menus
 set winaltkeys=no
