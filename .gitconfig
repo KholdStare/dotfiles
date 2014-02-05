@@ -21,6 +21,21 @@
 [user]
 	name = Alexander Kondratskiy
 	email = kholdstare0.0@gmail.com
+
+# ========
+# suggested settings by qt project from http://qt-project.org/wiki/Setting-up-Gerrit
+[push]
+    default = tracking
+[rerere]
+    enabled = true
+    # this saves you the git add, but you should verify the result with git diff --staged
+    autoupdate = true   
+[rebase]
+    stat = true
+[core]
+    pager = "less -FRSX"
+# ========
+
 [github]
 	user = KholdStare
 [init]
