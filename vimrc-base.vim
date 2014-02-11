@@ -177,6 +177,10 @@ vmap <leader>fu y:vimgrep /"/ ./**/*.c
 nmap <leader>r yiw:%s/"//g<Left><Left>
 vmap <leader>r y:%s/"//g<Left><Left>
 
+" Visually selected text also yanked into clipboard
+vnoremap y ygv"+y
+vnoremap Y Ygv"+Y
+
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
