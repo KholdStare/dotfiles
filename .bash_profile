@@ -1,11 +1,16 @@
 case "$COLORTERM" in
     gnome-terminal)
-        export TERM=xterm-256color
+        case "$TERM" in
+            *-256color) ;;
+            *)
+                export TERM=xterm-256color
+                ;;
+        esac
         ;;
 esac
 
 case "$TERM" in
-    screen-256color | xterm-256color)
+    *-256color)
         color_prompt=yes
         ;;
 esac

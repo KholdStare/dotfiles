@@ -90,6 +90,9 @@ set showmatch
 set foldmethod=syntax
 set foldnestmax=2
 
+" Handle mouse events better through ssh/tmux
+set ttymouse=xterm2
+
 "-----------------------------------------------------------------------------
 " Tag preferences
 "-----------------------------------------------------------------------------
