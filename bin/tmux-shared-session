@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -u
+
+SESSION_NAME=${1}
+SESSIONS_FOLDER=${HOME}/tmux-sessions
+SESSION_LOCATION=${SESSIONS_FOLDER}/${SESSION_NAME}
+
+# Check if session is already there
+tmux -S ${SESSION_LOCATION} has-session -t ${SESSION_NAME}
+SESSION_STATUS=$?
+
+set -e
+if [ "${SESSION_STATUS}" == "1" ]; then
+    mkdir -p ${SESSIONS_FOLDER}
+    tmux -S ${SESSION_LOCATION} new -d -s ${SESSION_NAME}
+    chmod 777 ${SESSION_LOCATION}
+fi
+
+tmux -S ${SESSION_LOCATION} attach
+
