@@ -1,0 +1,15 @@
+#!/bin/bash
+# Usage: git pull-and-rebase-onto branch
+#
+# Author: Alexander Kondratskiy
+
+set -e
+set -u
+
+BRANCH_TO_PULL=$1
+CURRENT_BRANCH=$(git-current-branch)
+
+git checkout ${BRANCH_TO_PULL}
+git pull
+git rebase ${BRANCH_TO_PULL} ${CURRENT_BRANCH}
+git checkout ${BRANCH_TO_PULL}
