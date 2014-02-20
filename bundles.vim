@@ -33,6 +33,7 @@ Bundle 'SirVer/ultisnips'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'yurifury/hexHighlight'
 Bundle 'mattn/gist-vim'
+Bundle 'laurentgoudet/vim-howdoi'
 
 " Colorscheme
 Bundle 'xoria256.vim'

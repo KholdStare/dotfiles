@@ -24,6 +24,9 @@ vmap <C-Down> ]egv
 map <F6> :ToggleNERDTree<CR>
 map <F7> :TlistToggle<CR>
 
+" Get Stack Overflow code snippets
+map <Leader>so <Plug>Howdoi
+
 " Switch between complementary filetypes
 " mnemonic: Go Switch
 nnoremap gs :A<CR>
