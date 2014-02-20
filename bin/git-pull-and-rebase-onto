@@ -12,4 +12,3 @@ CURRENT_BRANCH=$(git-current-branch)
 git checkout ${BRANCH_TO_PULL}
 git pull
 git rebase ${BRANCH_TO_PULL} ${CURRENT_BRANCH}
-git checkout ${BRANCH_TO_PULL}
