@@ -7,6 +7,7 @@ SESSIONS_FOLDER=${HOME}/tmux-sessions
 SESSION_LOCATION=${SESSIONS_FOLDER}/${SESSION_NAME}
 
 # Check if session is already there
+# TODO: could move this into if statement
 tmux -S ${SESSION_LOCATION} has-session -t ${SESSION_NAME}
 SESSION_STATUS=$?
 
