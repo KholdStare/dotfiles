@@ -23,9 +23,14 @@ set wildmenu
 " Ignore intermediates and source control in wildcard searches
 set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs,*.hi
 
-" Store swap/backup files in fixed location, not current directory.
-set dir=~/.vimswap//,/var/tmp//,/tmp//,.
-set backupdir=~/.vimbackup//
+" Enable backup, persistent undo, and persistent views
+set backup                  " Backups are nice ...
+if has('persistent_undo')
+    set undofile                " So is persistent undo ...
+    set undolevels=1000         " Maximum number of changes that can be undone
+    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+endif
+set viewoptions=folds,options,cursor,unix,slash
 
 " disable using alt modifier for accessing window menus
 set winaltkeys=no
@@ -227,24 +232,38 @@ if filereadable("SConstruct")
 endif
 
 "-----------------------------------------------------------------------------
-" Set up the window colors and size
+" Functions
 "-----------------------------------------------------------------------------
-if has("gui_running")
-    " Remove menu bar
-    set guioptions-=m
 
-    " Remove toolbar
-    set guioptions-=T
+" Store swap/backup files in fixed location, not current directory.
+" Adapted from https://github.com/spf13/spf13-vim/blob/3.0/.vimrc
+function! InitializeDirectories()
+    let dir_list = {
+                \ 'backup': 'backupdir',
+                \ 'views': 'viewdir',
+                \ 'swap': 'directory' }
 
-    " Remove all gui scrollbars! $%^& em!
-    set guioptions+=LlRrb
-    set guioptions-=LlRrb
-
-    set gfn=Inconsolata\ 12
-    if !exists("g:vimrcloaded")
-        winpos 0 0
-        winsize 130 100
-        let g:vimrcloaded = 1
+    if has('persistent_undo')
+        let dir_list['undo'] = 'undodir'
     endif
-endif
 
+    let parent = $HOME
+    let common_dir = parent . '/.vim'
+
+    for [dirname, settingname] in items(dir_list)
+        let directory = common_dir . dirname . '/'
+        if exists("*mkdir")
+            if !isdirectory(directory)
+                call mkdir(directory)
+            endif
+        endif
+        if !isdirectory(directory)
+            echo "Warning: Unable to create backup directory: " . directory
+            echo "Try: mkdir -p " . directory
+        else
+            let directory = substitute(directory, " ", "\\\\ ", "g")
+            exec "set " . settingname . "=" . directory
+        endif
+    endfor
+endfunction
+call InitializeDirectories()

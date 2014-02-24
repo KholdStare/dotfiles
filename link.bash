@@ -10,7 +10,7 @@ function to_breadcrumbs() {
     echo "$1" | sed -r -e 's@[^/]@@g' -e 's@/@../@g'
 }
 
-LINKED_FILES=".bash_profile .gitconfig .git_template .tmux.conf .vimrc .ghci .cabal/config bin/*"
+LINKED_FILES=".bash_profile .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci .cabal/config bin/*"
 COPIED_FILES=""
 
 chmod u+x bin/*
