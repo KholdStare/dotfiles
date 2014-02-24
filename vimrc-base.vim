@@ -23,6 +23,10 @@ set wildmenu
 " Ignore intermediates and source control in wildcard searches
 set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs,*.hi
 
+" Store swap/backup files in fixed location, not current directory.
+set dir=~/.vimswap//,/var/tmp//,/tmp//,.
+set backupdir=~/.vimbackup//
+
 " disable using alt modifier for accessing window menus
 set winaltkeys=no
 
