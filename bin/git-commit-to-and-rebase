@@ -1,0 +1,16 @@
+#!/bin/bash
+# Usage: git commit-to-and-rebase-back branch <git commit options>
+#
+# Author: Alexander Kondratskiy
+
+set -e
+set -u
+
+BRANCH_TO_COMMIT_TO=$1
+shift
+CURRENT_BRANCH=$(git-current-branch)
+
+git checkout ${BRANCH_TO_COMMIT_TO}
+git commit "$@"
+git rebase ${BRANCH_TO_COMMIT_TO} ${CURRENT_BRANCH}
+
