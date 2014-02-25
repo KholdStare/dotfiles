@@ -1,66 +1,81 @@
-set nocompatible
-filetype off                   " required!
+if has('vim_starting')
+    set nocompatible
 
-let g:vundle_default_git_proto="git"
+    " Required
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+let g:neobundle_default_git_protocol="git"
 
-" let Vundle manage Vundle
-" required! 
-Bundle 'gmarik/vundle'
+" Required
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " By the power of Shougo!
-Bundle 'Shougo/vimproc'
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/neocomplete.vim'
-Bundle 'Shougo/unite-outline'
-Bundle 'Shougo/unite-help'
+NeoBundle 'Shougo/vimproc', {
+      \ 'build' : {
+      \     'windows' : 'make -f make_mingw32.mak',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/unite-help'
 
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'scrooloose/syntastic'
 " dont want this to override defaults!
 " Bundle 'derekwyatt/vim-scala'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-unimpaired'
+NeoBundle 'tpope/vim-abolish'
 
-Bundle 'coderifous/textobj-word-column.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'yurifury/hexHighlight'
-Bundle 'mattn/gist-vim'
-Bundle 'laurentgoudet/vim-howdoi'
+NeoBundle 'coderifous/textobj-word-column.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'Lokaltog/vim-powerline'
+NeoBundle 'yurifury/hexHighlight'
+NeoBundle 'mattn/gist-vim'
+NeoBundle 'laurentgoudet/vim-howdoi'
 
 " Colorscheme
-Bundle 'xoria256.vim'
+NeoBundle 'xoria256.vim'
 
 " For automatically marking scripts as executable
-Bundle 'Shebang'
-Bundle 'bufkill.vim'
-Bundle 'vcscommand.vim'
+NeoBundle 'Shebang'
+NeoBundle 'bufkill.vim'
+NeoBundle 'vcscommand.vim'
 
-Bundle 'NERD_tree-Project'
-Bundle 'taglist.vim'
-Bundle 'a.vim'
-Bundle 'opencl.vim'
+NeoBundle 'NERD_tree-Project'
+NeoBundle 'taglist.vim'
+NeoBundle 'a.vim'
+NeoBundle 'opencl.vim'
 
 " haskell
-Bundle 'eagletmt/neco-ghc'
-Bundle 'eagletmt/ghcmod-vim'
-Bundle 'Twinside/vim-haskellConceal'
-
+NeoBundle 'eagletmt/neco-ghc'
+NeoBundle 'eagletmt/ghcmod-vim'
+NeoBundle 'Twinside/vim-haskellConceal'
 
 filetype plugin indent on     " required! 
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
 "
 " Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+" :NeoBundleList          - list configured bundles
+" :NeoBundleInstall(!)    - install(update) bundles
+" :NeoBundleSearch(!) foo - search(or refresh cache first) for foo
+" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 "
 " see :h vundle for more details or wiki for FAQ
 " NOTE: comments after Bundle command are not allowed..

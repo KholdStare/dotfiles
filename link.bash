@@ -34,5 +34,12 @@ for file in $COPIED_FILES; do
     fi
 done
 
+# Bootstrap vim
+if [[ ! -e "${HOME}/.vim/bundle/neobundle.vim" ]]; then
+    echo "BOOTSTRAPPING vim"
+    mkdir -p ~/.vim/bundle
+    git clone https://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
+fi
+
 # Fix warning from ghci complaining it is writable
 chmod g-w .ghci
