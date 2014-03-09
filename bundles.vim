@@ -45,6 +45,7 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'yurifury/hexHighlight'
 NeoBundle 'mattn/gist-vim'
 NeoBundle 'laurentgoudet/vim-howdoi'
+NeoBundle 'nelstrom/vim-markdown-folding'
 
 " Colorscheme
 NeoBundle 'xoria256.vim'
