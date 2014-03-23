@@ -103,4 +103,7 @@ let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', 
 let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds -g -fwarn-incomplete-patterns'
 let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
 
+" Python
+let g:syntastic_python_checkers = ['python', 'flake8']
+
 
