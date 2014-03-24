@@ -27,6 +27,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/unite-help'
+NeoBundle 'Shougo/neomru.vim'
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
