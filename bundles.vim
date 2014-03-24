@@ -32,8 +32,6 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'scrooloose/syntastic'
-" dont want this to override defaults!
-" Bundle 'derekwyatt/vim-scala'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
@@ -53,6 +51,7 @@ NeoBundle 'xoria256.vim'
 
 " For automatically marking scripts as executable
 NeoBundle 'Shebang'
+" Provides :BD to close a buffer without closing the window
 NeoBundle 'bufkill.vim'
 NeoBundle 'vcscommand.vim'
 

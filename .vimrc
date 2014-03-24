@@ -1,6 +1,6 @@
 
 "-----------------------------------------------------------------------------
-" Vundle (Plugins)
+" NeoBundle (Plugins)
 "-----------------------------------------------------------------------------
 source ~/dotfiles/bundles.vim
 
@@ -51,23 +51,11 @@ let g:CommandTMaxFiles=30000
 " Use unicode symbols for powerline
 let g:Powerline_symbols="unicode"
 
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-if has("autocmd")
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-endif
+" Autocomplete menu options
 set completeopt=longest,menuone
 
 "-----------------------------------------------------------------------------
-" Fugitive
+" Fugitive (Git plugin)
 "-----------------------------------------------------------------------------
 if has("autocmd")
     " Use .. to navigate up a tree when browsing fugitive history
@@ -83,7 +71,7 @@ endif
 "-----------------------------------------------------------------------------
 " Neocomplete
 "-----------------------------------------------------------------------------
-source ~/dotfiles/.neco-rc.vim
+source ~/dotfiles/neco-rc.vim
 
 "-----------------------------------------------------------------------------
 " Unite
