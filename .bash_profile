@@ -41,9 +41,16 @@ export PATH=$HOME/tools/bin:$PATH
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
-
+# RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
+
+# Py env
+export PYENV_ROOT="${HOME}/.pyenv"
+
+if [ -d "${PYENV_ROOT}" ]; then
+    export PATH="${PYENV_ROOT}/bin:${PATH}"
+    eval "$(pyenv init -)"
+fi
 
 # source a custom local bash configuration if one exists
 if [ -f ~/.bash_local ]; then
