@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+set -u
+
+USAGE="Create ctags for files/folders specified
+Usage:
+    generate-ctags <language> [<files/folders>...]
+
+Languages:
+    CPP
+    C
+"
+
+if [[ $# -eq 0 ]]; then
+    echo "${USAGE}" >&2
+    exit 1
+fi
+
+LANGAUGE=$1
+shift
+
+case ${LANGAUGE} in
+    CPP|C)
+        FIND_PATTERN="( -name "*.c" -o -name "*.cpp" -o -name "*.cxx" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" -o -name "*.hxx" )"
+        CTAGS_OPTIONS='--c-kinds=+p --c++-kinds=+p --languages=+C,C++ --extra=fq --fields=+a+n'
+        ;;
+    *)
+        echo "${USAGE}" >&2
+        exit 1
+        ;;
+esac
+
+DIRS="."
+# use other path if specified
+if [[ $# > 1 ]]; then
+    DIRS=$@
+fi
+
+echo DIRS: ${DIRS}
+
+
+find ${DIRS} -type f ${FIND_PATTERN} \
+    | tee cscope.files \
+    | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}
+
+cscope -b -q
