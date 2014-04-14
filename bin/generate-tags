@@ -16,6 +16,30 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
+# ===============================
+# Helpers
+predicate-is-directory() {
+    [[ -d "$1" ]]
+    return $?
+}
+
+predicate-is-file() {
+    [[ -f "$1" ]]
+    return $?
+}
+
+filter() {
+    PREDICATE=$1
+    shift
+
+    for WORD in "$@"; do
+        if ${PREDICATE} ${WORD}; then
+            echo $WORD
+        fi
+    done
+}
+# ===============================
+
 LANGAUGE=$1
 shift
 
@@ -30,17 +54,25 @@ case ${LANGAUGE} in
         ;;
 esac
 
-DIRS="."
-# use other path if specified
-if [[ $# > 1 ]]; then
-    DIRS=$@
+DIRECTORIES=$(filter "predicate-is-directory" $@)
+FILENAMES=$(filter "predicate-is-file" $@)
+
+if [[ -z "${DIRECTORIES}" ]] && [[ -z "${FILENAMES}" ]]; then
+    DIRECTORIES="."
 fi
 
-echo DIRS: ${DIRS}
 
+# feed all filenames through a pipe
+FILENAME_PIPE=/tmp/tmp.filepipe.$$
+mkfifo ${FILENAME_PIPE}
+trap "rm ${FILENAME_PIPE}" EXIT
 
-find ${DIRS} -type f ${FIND_PATTERN} \
-    | tee cscope.files \
-    | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}
+echo "${FILENAMES}" > ${FILENAME_PIPE}
 
+if [[ -n "${DIRECTORIES}" ]]; then
+    find ${DIRECTORIES} -type f ${FIND_PATTERN} >> ${FILENAME_PIPE} &
+fi
+# ===============================
+
+(tee cscope.files | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}) < ${FILENAME_PIPE}
 cscope -b -q
