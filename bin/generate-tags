@@ -38,6 +38,12 @@ filter() {
         fi
     done
 }
+
+find_source_files() {
+    if [[ -n "${DIRECTORIES}" ]]; then
+        find ${DIRECTORIES} -type f ${FIND_PATTERN}
+    fi
+}
 # ===============================
 
 LANGAUGE=$1
@@ -60,19 +66,12 @@ FILENAMES=$(filter "predicate-is-file" $@)
 if [[ -z "${DIRECTORIES}" ]] && [[ -z "${FILENAMES}" ]]; then
     DIRECTORIES="."
 fi
-
-
-# feed all filenames through a pipe
-FILENAME_PIPE=/tmp/tmp.filepipe.$$
-mkfifo ${FILENAME_PIPE}
-trap "rm ${FILENAME_PIPE}" EXIT
-
-echo "${FILENAMES}" > ${FILENAME_PIPE}
-
-if [[ -n "${DIRECTORIES}" ]]; then
-    find ${DIRECTORIES} -type f ${FIND_PATTERN} >> ${FILENAME_PIPE} &
-fi
 # ===============================
 
-(tee cscope.files | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}) < ${FILENAME_PIPE}
+echo generating CTAGS
+cat <(find_source_files) <(echo "${FILENAMES}") \
+    | tee cscope.files \
+    | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}
+
+echo generating CSCOPE
 cscope -b -q
