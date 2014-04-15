@@ -21,7 +21,7 @@ set wildmenu
 " set wildmode=list:longest
 
 " Ignore intermediates and source control in wildcard searches
-set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs,*.hi
+set wildignore+=*.o,*.obj,*.d,.git,CVS,.svn,_darcs,*.hi,.tox
 
 " Enable backup, persistent undo, and persistent views
 set backup                  " Backups are nice ...
