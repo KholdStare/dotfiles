@@ -10,18 +10,36 @@ function to_breadcrumbs() {
     echo "$1" | sed -r -e 's@[^/]@@g' -e 's@/@../@g'
 }
 
+function get_link_path() {
+    FILENAME=$1
+    pushd $(dirname ${FILENAME}) > /dev/null
+    stat -c '%N' $(basename ${FILENAME}) | cut -d ' ' -f 3 | sed -e 's/^`//' -e "s/'$//"
+    popd > /dev/null
+}
+
 LINKED_FILES=".bashrc .bash_profile .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci .cabal/config bin/*"
 COPIED_FILES=""
 
 chmod u+x bin/*
 
 for file in $LINKED_FILES; do
-    if [[ ! -e ../$file ]]; then
+
+    TARGET=$(to_breadcrumbs $file)dotfiles/$file
+    LINKNAME=../$file
+
+    if [[ ! -e ${LINKNAME} ]]; then
         echo LINKING $file
         mkdir -p ../$(dirname $file)
-        ln -s $(to_breadcrumbs $file)dotfiles/$file ../$file
-    else
-        echo LINK $file already exists
+        ln -s ${TARGET} ${LINKNAME}
+    elif [[ -L ${LINKNAME} ]]; then
+        CURRENT_TARGET=$(get_link_path ${LINKNAME})
+        if [[ "$CURRENT_TARGET" == "$TARGET" ]]; then
+            echo LINKED $file exists
+        else
+            echo LINK $file already exists but points to ${CURRENT_TARGET}
+        fi
+    else 
+        echo FILE $file already exists. Will not create link
     fi
 done
 
