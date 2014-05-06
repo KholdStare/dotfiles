@@ -109,6 +109,8 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv init -)"
 fi
 
+export EDITOR=vim
+
 # ========================================
 # Customization
 # ========================================
