@@ -65,6 +65,9 @@ NeoBundle 'eagletmt/neco-ghc'
 NeoBundle 'eagletmt/ghcmod-vim'
 NeoBundle 'Twinside/vim-haskellConceal'
 
+" idris
+NeoBundle 'idris-hackers/idris-vim'
+
 filetype plugin indent on     " required! 
 
 " If there are uninstalled bundles found on startup,
