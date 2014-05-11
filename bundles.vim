@@ -44,6 +44,7 @@ NeoBundle 'yurifury/hexHighlight'
 NeoBundle 'laurentgoudet/vim-howdoi'
 NeoBundle 'nelstrom/vim-markdown-folding'
 NeoBundle 'majutsushi/tagbar'
+NeoBundle 'godlygeek/tabular'
 
 " Colorscheme
 NeoBundle 'xoria256.vim'
