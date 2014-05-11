@@ -54,8 +54,12 @@ A list of shortcuts that I don't want to forget. Anything marked with
 
 ### NerdTree - File Browser
 
-* `<F6>` - toggle NerdTree **custom**
+* `<F6>` - toggle NerdTree (**custom**)
 * `:NERDTreeFind` - Find current file in filesystem. (Type `:N<Tab>F<Tab><CR>`)
+
+### TagBar - file outline
+
+* `<F7>` - open tagbar (**custom**)
 
 ### NerdCommenter - Comments
 
