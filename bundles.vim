@@ -38,11 +38,9 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
 
-NeoBundle 'coderifous/textobj-word-column.vim'
-NeoBundle 'SirVer/ultisnips'
+"NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'yurifury/hexHighlight'
-NeoBundle 'mattn/gist-vim'
 NeoBundle 'laurentgoudet/vim-howdoi'
 NeoBundle 'nelstrom/vim-markdown-folding'
 
@@ -53,7 +51,6 @@ NeoBundle 'xoria256.vim'
 NeoBundle 'Shebang'
 " Provides :BD to close a buffer without closing the window
 NeoBundle 'bufkill.vim'
-NeoBundle 'vcscommand.vim'
 
 NeoBundle 'NERD_tree-Project'
 NeoBundle 'taglist.vim'
