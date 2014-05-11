@@ -22,7 +22,7 @@ vmap <C-Down> ]egv
 
 " opens nerd tree in project root dir
 map <F6> :ToggleNERDTree<CR>
-map <F7> :TlistToggle<CR>
+map <F7> :TagbarToggle<CR>
 
 " Get Stack Overflow code snippets
 map <Leader>so <Plug>Howdoi

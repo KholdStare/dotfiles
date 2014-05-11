@@ -43,6 +43,7 @@ NeoBundle 'Lokaltog/vim-powerline'
 NeoBundle 'yurifury/hexHighlight'
 NeoBundle 'laurentgoudet/vim-howdoi'
 NeoBundle 'nelstrom/vim-markdown-folding'
+NeoBundle 'majutsushi/tagbar'
 
 " Colorscheme
 NeoBundle 'xoria256.vim'
@@ -53,7 +54,6 @@ NeoBundle 'Shebang'
 NeoBundle 'bufkill.vim'
 
 NeoBundle 'NERD_tree-Project'
-NeoBundle 'taglist.vim'
 NeoBundle 'a.vim'
 NeoBundle 'opencl.vim'
 
