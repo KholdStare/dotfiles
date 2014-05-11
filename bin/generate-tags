@@ -1,5 +1,7 @@
 #!/bin/bash
 set -e
+# suppress glob expansion in script
+set -f
 set -u
 
 USAGE="Create ctags for files/folders specified
@@ -7,8 +9,8 @@ Usage:
     generate-ctags <language> [<files/folders>...]
 
 Languages:
-    CPP
-    C
+    HASKELL, HS
+    CPP, C
 "
 
 if [[ $# -eq 0 ]]; then
@@ -49,29 +51,35 @@ find_source_files() {
 LANGAUGE=$1
 shift
 
-case ${LANGAUGE} in
-    CPP|C)
-        FIND_PATTERN="( -name "*.c" -o -name "*.cpp" -o -name "*.cxx" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" -o -name "*.hxx" )"
-        CTAGS_OPTIONS='--c-kinds=+p --c++-kinds=+p --languages=+C,C++ --extra=fq --fields=+a+n'
-        ;;
-    *)
-        echo "${USAGE}" >&2
-        exit 1
-        ;;
-esac
-
 DIRECTORIES=$(filter "predicate-is-directory" $@)
 FILENAMES=$(filter "predicate-is-file" $@)
 
 if [[ -z "${DIRECTORIES}" ]] && [[ -z "${FILENAMES}" ]]; then
     DIRECTORIES="."
 fi
+
+CUSTOM_COMMAND=''
+case ${LANGAUGE} in
+    CPP|C)
+        FIND_PATTERN="-name "*.c" -o -name "*.cpp" -o -name "*.cxx" -o -name "*.cc" -o -name "*.h" -o -name "*.hpp" -o -name "*.hxx""
+        CTAGS_OPTIONS='--c-kinds=+p --c++-kinds=+p --languages=+C,C++ --extra=fq --fields=+a+n'
+        ;;
+    HASKELL|HS)
+        CUSTOM_COMMAND="hasktags -c -x ${DIRECTORIES} ${FILENAMES}"
+        ;;
+    *)
+        echo "${USAGE}" >&2
+        exit 1
+        ;;
+esac
 # ===============================
 
-echo generating CTAGS
-cat <(find_source_files) <(echo "${FILENAMES}") \
-    | tee cscope.files \
-    | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}
+if [[ -z "${CUSTOM_COMMAND}" ]]; then
+    cat <(find_source_files) <(echo "${FILENAMES}") \
+        | tee cscope.files \
+        | ctags --tag-relative -L- --exclude=.git ${CTAGS_OPTIONS}
 
-echo generating CSCOPE
-cscope -b -q
+    cscope -b -q
+else
+    ${CUSTOM_COMMAND}
+fi
