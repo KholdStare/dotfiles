@@ -23,11 +23,13 @@ NeoBundle 'Shougo/vimproc', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/unite-help'
-NeoBundle 'Shougo/neomru.vim'
+
+NeoBundle 'wincent/Command-T', {
+      \ 'build' : {
+      \     'unix' : 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t',
+      \    },
+      \ }
 
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'

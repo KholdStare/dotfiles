@@ -24,6 +24,8 @@ vmap <C-Down> ]egv
 map <silent> <F6> :ToggleNERDTree<CR>
 map <silent> <F7> :TagbarToggle<CR>
 
+nmap <silent> <C-p> :CommandT<CR>
+
 " Get Stack Overflow code snippets
 map <Leader>so <Plug>Howdoi
 
@@ -77,11 +79,6 @@ source ~/dotfiles/neco-rc.vim
 " Tagbar
 "-----------------------------------------------------------------------------
 source ~/dotfiles/tagbar-rc.vim
-
-"-----------------------------------------------------------------------------
-" Unite
-"-----------------------------------------------------------------------------
-source ~/dotfiles/unite-rc.vim
 
 "-----------------------------------------------------------------------------
 " Syntastic
