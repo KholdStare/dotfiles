@@ -24,8 +24,6 @@ vmap <C-Down> ]egv
 map <silent> <F6> :ToggleNERDTree<CR>
 map <silent> <F7> :TagbarToggle<CR>
 
-nmap <silent> <C-p> :CommandT<CR>
-
 " Get Stack Overflow code snippets
 map <Leader>so <Plug>Howdoi
 
@@ -47,14 +45,27 @@ colorscheme xoria256
 " ultisnips snippet location
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
 
-" Command-T settings
-let g:CommandTMaxFiles=30000
-
 " Use unicode symbols for powerline
 let g:Powerline_symbols="unicode"
 
 " Autocomplete menu options
 set completeopt=longest,menuone
+
+"-----------------------------------------------------------------------------
+" Command-T
+"-----------------------------------------------------------------------------
+nnoremap [commandt] <Nop>
+nmap <Space> [commandt]
+
+nnoremap <silent>[commandt]<Space> :CommandT
+nmap <C-p> [commandt]<Space>
+nmap <Leader>t [commandt]<Space>
+
+nnoremap <silent>[commandt]b :CommandTBuffer<CR>
+nnoremap <silent>[commandt]f :CommandTJump<CR>
+
+let g:CommandTFileScanner="watchman"
+let g:CommandTMaxFiles=100000
 
 "-----------------------------------------------------------------------------
 " Fugitive (Git plugin)
