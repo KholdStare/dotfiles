@@ -65,7 +65,7 @@ A list of shortcuts that I don't want to forget. Anything marked with
 
 Caches all files in current directory on first use (give it a few seconds), allowing very fast subsequent file searches
 
-* `<space><space>` / `<C-P>` - fuzzy search filenames in curent directory
+* `<space><space>` / `<C-p>` - fuzzy search filenames in current directory
 * `<space>f` - fuzzy search recently used filenames
 * `<space>b` - fuzzy search open buffers
 
@@ -102,3 +102,18 @@ See fugitive vimcasts:
 * [Resolving merge conflicts with vimdiff](http://vimcasts.org/episodes/fugitive-vim-resolving-merge-conflicts-with-vimdiff/)
 * [Browsing the git object database](http://vimcasts.org/episodes/fugitive-vim-browsing-the-git-object-database/)
 * [Exploring the history of a git repository](http://vimcasts.org/episodes/fugitive-vim-exploring-the-history-of-a-git-repository/)
+
+### UltiSnips - snippet plugin
+
+![GIF Demo](https://raw.github.com/SirVer/ultisnips/master/doc/demo.gif)
+
+* Shorthand text can be expanded into a full snippet by pressing `<Tab>`
+   * Try typing `main<Tab>` in a c file. This will expand into the main
+     function.
+* Snippets can have several "holes" to fill in the skeleton.
+   * Move between holes using `<C-j>` and `<C-k>`
+   * Try typing `if<Tab>` in a c file. Type the condition, and move to the body
+     with `<C-j>`
+
+See the official [github for UltiSnips](https://github.com/SirVer/ultisnips)
+for more information.
