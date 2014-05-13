@@ -39,7 +39,7 @@ A list of shortcuts that I don't want to forget. Anything marked with
 * `:s` - substitute
    * `\%V` - restrict substitution to visual selection (as opposed to whole lines)
 
-### Surround
+### Surround - add/modify/delete surrounding parentheses/quotes
 
 * `ds<delim>` - Delete surrounding delimeters.
 * `cs<delim-from><delim-to>` - Change surrounding delimeters.
@@ -60,6 +60,14 @@ A list of shortcuts that I don't want to forget. Anything marked with
 ### TagBar - file outline
 
 * `<F7>` - open tagbar (**custom**)
+
+### Command-T - fast fuzzy file search
+
+Caches all files in current directory on first use (give it a few seconds), allowing very fast subsequent file searches
+
+* `<space><space>` / `<C-P>` - fuzzy search filenames in curent directory
+* `<space>f` - fuzzy search recently used filenames
+* `<space>b` - fuzzy search open buffers
 
 ### NerdCommenter - Comments
 
