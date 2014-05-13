@@ -57,7 +57,7 @@ set completeopt=longest,menuone
 nnoremap [commandt] <Nop>
 nmap <Space> [commandt]
 
-nnoremap <silent>[commandt]<Space> :CommandT
+nnoremap <silent>[commandt]<Space> :CommandT<CR>
 nmap <C-p> [commandt]<Space>
 nmap <Leader>t [commandt]<Space>
 
