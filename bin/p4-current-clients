@@ -1,0 +1,25 @@
+#!/usr/bin/env python
+
+import os
+from itertools import(imap, ifilter)
+from subprocess import (check_output)
+from collections import (namedtuple)
+
+Client = namedtuple("Client", ["name", "root"])
+
+
+def clientFromString(s):
+    fields = s.strip().split()
+    return Client(fields[1], fields[4])
+
+if __name__ == "__main__":
+
+    currentDir = os.getcwd()
+
+    stdoutdata = check_output("p4 clients -u $(whoami)", shell=True)
+
+    clients = imap(clientFromString, stdoutdata.strip().split('\n'))
+    clientsAboveRoot = ifilter(lambda c: currentDir.startswith(c.root), clients)
+
+    for client in clientsAboveRoot:
+        print client.name
