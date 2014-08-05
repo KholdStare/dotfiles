@@ -222,11 +222,6 @@ endif
 "-----------------------------------------------------------------------------
 " Custom settings depending on local environment
 "-----------------------------------------------------------------------------
-" extra custom vim settings
-if filereadable(".custom.vim")
-    so .custom.vim
-endif
-
 " Use scons
 if filereadable("SConstruct")
     set makeprg=scons

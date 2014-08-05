@@ -107,4 +107,9 @@ let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
 " Python
 let g:syntastic_python_checkers = ['python', 'flake8']
 
+" extra custom vim settings for current dir
+if filereadable(".custom.vim")
+    so .custom.vim
+endif
+
 
