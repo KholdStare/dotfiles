@@ -12,7 +12,7 @@ fi
 
 # e.g.Turns ".cabal/config" into "../"
 function to_breadcrumbs() {
-    echo "$1" | sed -r -e 's@[^/]@@g' -e 's@/@../@g'
+    echo "$1" | sed -e 's@[^/]@@g' -e 's@/@../@g'
 }
 
 function get_link_path() {
