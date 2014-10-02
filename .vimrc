@@ -77,6 +77,21 @@ if has("autocmd")
       \   nnoremap <buffer> .. :edit %:h<CR> |
       \ endif
 
+    function! TurnOffTaxingFeaturesIfLargeFile()
+        let numLines = line('$')
+
+        if numLines > 3000
+            set foldmethod=manual
+        endif
+
+        if numLines > 6000
+            let b:tagbar_ignore = 1
+        endif
+    endfunction
+
+    " disable plugins/features that fail on large files
+    autocmd BufRead * call TurnOffTaxingFeaturesIfLargeFile()
+
     " Automatically close hidden fugitive files. less buffer clutter
     autocmd BufReadPost fugitive://* set bufhidden=delete
 endif
