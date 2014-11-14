@@ -1,0 +1,20 @@
+#!/bin/bash
+# Author: Alexander Kondratskiy
+
+set -e
+set -u
+
+USAGE="Usage:
+    git sync-and-merge <master-branch> (branch)"
+
+BRANCH_TO_PULL=$1
+BRANCH_TO_MERGE=$(git-current-branch)
+COMMIT_TO_MERGE=${BRANCH_TO_MERGE}
+if [[ $# -eq 2 ]]; then
+    COMMIT_TO_MERGE=$2
+fi
+
+git checkout ${BRANCH_TO_MERGE}
+git-pull-and-rebase-onto ${BRANCH_TO_PULL}
+git checkout ${BRANCH_TO_PULL}
+git merge ${BRANCH_TO_PULL} ${COMMIT_TO_MERGE}
