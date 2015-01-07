@@ -8,7 +8,7 @@ endif
 let g:neobundle_default_git_protocol="git"
 
 " Required
-call neobundle#rc(expand('~/.vim/bundle/'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required
@@ -72,6 +72,8 @@ NeoBundle 'idris-hackers/idris-vim'
 
 " rust
 NeoBundle 'wting/rust.vim'
+
+call neobundle#end()
 
 filetype plugin indent on     " required! 
 
