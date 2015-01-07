@@ -28,6 +28,7 @@ NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'wincent/Command-T', {
       \ 'build' : {
       \     'unix' : 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t',
+      \     'mac' : 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t',
       \    },
       \ }
 
@@ -68,6 +69,9 @@ NeoBundle 'Twinside/vim-haskellConceal'
 
 " idris
 NeoBundle 'idris-hackers/idris-vim'
+
+" rust
+NeoBundle 'wting/rust.vim'
 
 filetype plugin indent on     " required! 
 
