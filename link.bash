@@ -10,6 +10,8 @@ if [[ $# -gt 0 ]]; then
     COMMAND=$1
 fi
 
+OS=$(uname)
+
 # e.g.Turns ".cabal/config" into "../"
 function to_breadcrumbs() {
     echo "$1" | sed -e 's@[^/]@@g' -e 's@/@../@g'
@@ -18,7 +20,11 @@ function to_breadcrumbs() {
 function get_link_path() {
     FILENAME=$1
     pushd $(dirname ${FILENAME}) > /dev/null
-    stat -c '%N' $(basename ${FILENAME}) | cut -d ' ' -f 3 | sed -e 's/^`//' -e "s/'$//"
+    if [[ "${OS}" = "Darwin" ]]; then
+        readlink $(basename ${FILENAME})
+    else
+        stat -c '%N' $(basename ${FILENAME}) | cut -d ' ' -f 3 | sed -e 's/^`//' -e "s/'$//"
+    fi
     popd > /dev/null
 }
 
@@ -41,11 +47,11 @@ function backup_file() {
     TIMESTAMP=$(date +'%Y.%m.%d')
     BACKUP_NAME=${FILENAME}.${TIMESTAMP}.bak
     echo BACK UP ${FILENAME} to ${BACKUP_NAME}
-    mv ${FILENAME} ${BACKUP_NAME}
+    cp ${FILENAME} ${BACKUP_NAME}
 }
 
-LINKED_FILES=".bashrc .bash_profile .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci .cabal/config bin/*"
-COPIED_FILES=""
+LINKED_FILES=".bashrc .bash_profile .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci bin/*"
+COPIED_FILES=".cabal/config"
 
 chmod u+x bin/*
 
@@ -70,6 +76,7 @@ for file in $LINKED_FILES; do
 
         if [[ "${COMMAND}" == "force" ]]; then
             backup_file ${LINKNAME}
+            rm ${LINKNAME}
             CREATE_LINK=1
         fi
     else
@@ -95,6 +102,14 @@ if [[ ! -e "${HOME}/.vim/bundle/neobundle.vim" ]]; then
     echo "BOOTSTRAPPING vim"
     mkdir -p ~/.vim/bundle
     git clone git://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
+fi
+
+# Fix cabal config paths
+CABAL_CONFIG_FILE="${HOME}/.cabal/config"
+if [[ -e "${CABAL_CONFIG_FILE}" ]]; then
+    echo "FIXING cabal config paths"
+    backup_file ${CABAL_CONFIG_FILE}
+    sed -i "" -e "s!\~!${HOME}!" ${CABAL_CONFIG_FILE}
 fi
 
 # Fix warning from ghci complaining it is writable
