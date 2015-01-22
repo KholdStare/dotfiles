@@ -77,11 +77,26 @@ if has("autocmd")
       \   nnoremap <buffer> .. :edit %:h<CR> |
       \ endif
 
+    " Automatically close hidden fugitive files. less buffer clutter
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+endif
+
+"-----------------------------------------------------------------------------
+" Neocomplete
+"-----------------------------------------------------------------------------
+"source ~/dotfiles/neco-rc.vim
+
+"-----------------------------------------------------------------------------
+" Tagbar
+"-----------------------------------------------------------------------------
+source ~/dotfiles/tagbar-rc.vim
+
+if has("autocmd")
     function! TurnOffTaxingFeaturesIfLargeFile()
         let numLines = line('$')
 
         if numLines > 3000
-            set foldmethod=manual
+            setlocal foldmethod=manual
         endif
 
         if numLines > 6000
@@ -90,21 +105,8 @@ if has("autocmd")
     endfunction
 
     " disable plugins/features that fail on large files
-    autocmd BufRead * call TurnOffTaxingFeaturesIfLargeFile()
-
-    " Automatically close hidden fugitive files. less buffer clutter
-    autocmd BufReadPost fugitive://* set bufhidden=delete
+    autocmd BufNewFile,BufReadPost *.h call TurnOffTaxingFeaturesIfLargeFile()
 endif
-
-"-----------------------------------------------------------------------------
-" Neocomplete
-"-----------------------------------------------------------------------------
-source ~/dotfiles/neco-rc.vim
-
-"-----------------------------------------------------------------------------
-" Tagbar
-"-----------------------------------------------------------------------------
-source ~/dotfiles/tagbar-rc.vim
 
 "-----------------------------------------------------------------------------
 " Syntastic
