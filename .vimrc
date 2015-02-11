@@ -131,8 +131,8 @@ endif
 "-----------------------------------------------------------------------------
 
 " C++
-let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++0x'
-let g:syntastic_cpp_compiler = 'g++-4.7'
+let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++1y'
+let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
 
 " Haskell
