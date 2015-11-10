@@ -43,7 +43,8 @@ NeoBundle 'tpope/vim-abolish'
 
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
-NeoBundle 'Lokaltog/vim-powerline'
+" NeoBundle 'Lokaltog/vim-powerline' abandoned!
+NeoBundle 'bling/vim-airline'
 NeoBundle 'yurifury/hexHighlight'
 NeoBundle 'laurentgoudet/vim-howdoi'
 NeoBundle 'nelstrom/vim-markdown-folding'
