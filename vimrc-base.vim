@@ -103,6 +103,8 @@ set foldlevelstart=99
 " Handle mouse events better through ssh/tmux
 set ttymouse=xterm2
 
+set runtimepath+=/usr/share/vim/vimfiles
+
 "-----------------------------------------------------------------------------
 " Tag preferences
 "-----------------------------------------------------------------------------
