@@ -1,0 +1,28 @@
+#!/bin/bash
+set -e
+set -u
+
+RANDOM_ID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)
+CONTAINER_ID_FILE=/tmp/docker-container-id.${RANDOM_ID}
+
+set +e
+docker run \
+    --cidfile=${CONTAINER_ID_FILE} \
+    -it \
+    -u ${USER} \
+    -w ${PWD} \
+    -v ${HOME}/workspace:${HOME}/workspace \
+    -v ${HOME}/.ccache:${HOME}/.ccache \
+    -v /tmp:/tmp \
+    -e TERM=xterm-256color \
+    $@
+EXIT_CODE=$?
+CONTAINER_ID=$(cat ${CONTAINER_ID_FILE})
+rm ${CONTAINER_ID_FILE}
+set -e
+
+# Remove container in the background
+echo Removing container ${CONTAINER_ID} >&2
+docker rm ${CONTAINER_ID} &>/dev/null &
+
+exit ${EXIT_CODE}

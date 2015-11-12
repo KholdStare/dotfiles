@@ -1,0 +1,78 @@
+#!/bin/bash
+set -e
+set -u
+
+# finds name of the image in the commandline arguments
+find_image() {
+    local NON_OPTIONS=$(echo "$@" | tr ' ' '\n' | grep -v '^-' | sort | uniq)
+    local AVAILABLE_IMAGE_NAMES=$(docker images | sed '1d' | awk '{ print $1 }' | sort | uniq)
+    local IMAGE_NAME=$(comm -12 <(echo "${NON_OPTIONS}") <(echo "${AVAILABLE_IMAGE_NAMES}"))
+
+    if [[ -z "${IMAGE_NAME}" ]]; then
+        echo "No image name found in commandline" >&2
+        exit 1
+    fi
+
+    if [[ $(echo "${IMAGE_NAME}" | wc -l) -ne 1 ]]; then
+        echo "More than one image name given in commandline" >&2
+        exit 1
+    fi
+
+    echo "${IMAGE_NAME}"
+}
+
+WORKSPACES_DIR=${HOME}/docker-workspaces
+mkdir -p ${WORKSPACES_DIR}
+
+# mounts workspace overlay using overlayfs
+setup_workspace_overlay() {
+    set -e
+    set -u
+
+    local IMAGE_NAME=$1
+    shift
+
+    local BASE_DIR=${WORKSPACES_DIR}/${IMAGE_NAME}
+
+    local LOWER=${HOME}/workspace
+    local UPPER=${BASE_DIR}/workspace
+    local WORK=${BASE_DIR}/.work
+    local MERGED=${BASE_DIR}/.merged
+    mkdir -p ${UPPER} ${WORK} ${MERGED}
+
+    if ! mountpoint -q -- ${MERGED}; then
+        sudo mount -t overlay overlay \
+            -o lowerdir=${LOWER},upperdir=${UPPER},workdir=${WORK} ${MERGED}
+    fi
+
+    echo ${MERGED}
+}
+
+IMAGE_NAME=$(find_image "$@")
+OVERLAYED_WORKSPACE_DIR=$(setup_workspace_overlay ${IMAGE_NAME})
+trap "sudo umount ${OVERLAYED_WORKSPACE_DIR}" EXIT
+
+RANDOM_ID=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)
+CONTAINER_ID_FILE=/tmp/docker-container-id.${RANDOM_ID}
+
+set +e
+docker run \
+    --cidfile=${CONTAINER_ID_FILE} \
+    -it \
+    -u ${USER} \
+    -w ${PWD} \
+    -v ${OVERLAYED_WORKSPACE_DIR}:${HOME}/workspace \
+    -v ${HOME}/.ccache:${HOME}/.ccache \
+    -v /tmp:/tmp \
+    -e TERM=xterm-256color \
+    $@
+EXIT_CODE=$?
+CONTAINER_ID=$(cat ${CONTAINER_ID_FILE})
+rm ${CONTAINER_ID_FILE}
+set -e
+
+# Remove container in the background
+echo Removing container ${CONTAINER_ID} >&2
+docker rm ${CONTAINER_ID} &>/dev/null &
+
+exit ${EXIT_CODE}
