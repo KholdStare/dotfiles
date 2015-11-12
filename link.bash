@@ -50,7 +50,7 @@ function backup_file() {
     cp ${FILENAME} ${BACKUP_NAME}
 }
 
-LINKED_FILES=".bashrc .bash_profile .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci bin/*"
+LINKED_FILES=".bashrc .bash_profile .bash_completion .gitconfig .git_template .tmux.conf .vimrc .gvimrc .ghci bin/*"
 COPIED_FILES=".cabal/config"
 
 chmod u+x bin/*
