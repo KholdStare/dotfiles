@@ -38,7 +38,7 @@ fi
 # Color terminal detection
 # ========================================
 case "$COLORTERM" in
-    gnome-terminal)
+    gnome-terminal|xfce4-terminal)
         case "$TERM" in
             *-256color) ;;
             *)
