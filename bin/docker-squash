@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "$1" -o -z "$2" ]
+then
+    echo "$0 IMAGE REPOSITORY[:TAG]" 1>&2
+    echo " "
+    echo "$0 creates a new images without history"
+    exit 1
+fi
+
+set -e
+set -u
+
+TEMP_CONTAINER=$(docker create $1)
+trap "docker rm ${TEMP_CONTAINER}" EXIT
+docker-rebase ${TEMP_CONTAINER} $2
