@@ -91,6 +91,7 @@ done
 for file in $COPIED_FILES; do
     if [[ ! -e ../$file ]]; then
         echo COPYING $file
+        mkdir -p ../$(dirname ${file})
         cp $file ../$file;
     else
         echo COPY $file already exists
@@ -109,7 +110,7 @@ CABAL_CONFIG_FILE="${HOME}/.cabal/config"
 if [[ -e "${CABAL_CONFIG_FILE}" ]]; then
     echo "FIXING cabal config paths"
     backup_file ${CABAL_CONFIG_FILE}
-    sed -i "" -e "s!\~!${HOME}!" ${CABAL_CONFIG_FILE}
+    sed -i"" -e "s!\~!${HOME}!" ${CABAL_CONFIG_FILE}
 fi
 
 # Fix warning from ghci complaining it is writable
