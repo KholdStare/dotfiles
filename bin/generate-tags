@@ -6,11 +6,15 @@ set -u
 
 USAGE="Create ctags for files/folders specified
 Usage:
-    generate-ctags <language> [<files/folders>...]
+    generate-ctags [--nolock] <language> [<files/folders>...]
 
 Languages:
     HASKELL, HS
     CPP, C
+
+Options:
+    --nolock    Dont attempt to create file lock, which would prevent multiple
+                concurrent invocations
 "
 
 if [[ $# -eq 0 ]]; then
@@ -27,6 +31,11 @@ predicate-is-directory() {
 
 predicate-is-file() {
     [[ -f "$1" ]]
+    return $?
+}
+
+predicate-is-option() {
+    [[ $1 == -* ]]
     return $?
 }
 
@@ -53,6 +62,7 @@ shift
 
 DIRECTORIES=$(filter "predicate-is-directory" $@)
 FILENAMES=$(filter "predicate-is-file" $@)
+OPTIONS=$(filter "predicate-is-option" $@)
 
 if [[ -z "${DIRECTORIES}" ]] && [[ -z "${FILENAMES}" ]]; then
     DIRECTORIES="."
@@ -74,6 +84,36 @@ case ${LANGAUGE} in
 esac
 # ===============================
 
+NOLOCK=""
+for OPTION in ${OPTIONS}; do
+    case "${OPTION}" in
+        --nolock)
+            NOLOCK=${OPTION}
+            ;;
+        *)
+            echo "${USAGE}" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ -z "${NOLOCK}" ]]; then
+    # TODO: could reuse this stuff for other scripts
+    LOCK_FILE=.generate-tags-lock
+    LOCKFD=99
+
+    _lock()             { flock -$1 $LOCKFD; }
+    _no_more_locking()  { _lock u; _lock xn && rm -f ${LOCK_FILE}; }
+    _prepare_locking()  { eval "exec ${LOCKFD}>\"${LOCK_FILE}\""; trap _no_more_locking EXIT; }
+
+    exlock_now()        { _lock xn; }  # obtain an exclusive lock immediately or fail
+
+    _prepare_locking
+
+    exlock_now || exit 0
+fi
+
+# ===============================
 if [[ -z "${CUSTOM_COMMAND}" ]]; then
     cat <(find_source_files) <(echo "${FILENAMES}") \
         | tee cscope.files \
