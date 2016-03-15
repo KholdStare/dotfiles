@@ -40,6 +40,7 @@ NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-abolish'
+NeoBundle 'tpope/vim-sleuth'
 
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
@@ -73,6 +74,9 @@ NeoBundle 'idris-hackers/idris-vim'
 
 " rust
 NeoBundle 'wting/rust.vim'
+
+" python
+NeoBundle 'tshirtman/vim-cython'
 
 call neobundle#end()
 
