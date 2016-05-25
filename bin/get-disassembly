@@ -1,0 +1,18 @@
+#!/bin/bash
+USAGE="Disassembles a function in a binary and prints to standard out
+
+    $0 <path-to-binary> <function-name>
+"
+
+set -e
+set -u
+
+if [[ $# -lt 2 ]]; then
+    echo "${USAGE}"
+    exit 1
+fi
+
+PATH_TO_BINARY=$1
+FUNCTION=$2
+
+gdb -batch -ex "file ${PATH_TO_BINARY}" -ex "disassemble ${FUNCTION}"
