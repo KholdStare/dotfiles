@@ -101,6 +101,9 @@ export PATH=$HOME/bin:$PATH
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
 # Py env
 export PYENV_ROOT="${HOME}/.pyenv"
 
