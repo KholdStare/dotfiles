@@ -41,6 +41,7 @@
     stat = true
 [core]
     pager = "less -FRSX"
+	eol = lf
 
 # ========
 # Handy aliases
