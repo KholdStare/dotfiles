@@ -101,7 +101,9 @@ set foldnestmax=2
 set foldlevelstart=99
 
 " Handle mouse events better through ssh/tmux
-set ttymouse=xterm2
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 
 set runtimepath+=/usr/share/vim/vimfiles
 
