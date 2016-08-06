@@ -44,7 +44,7 @@ NeoBundle 'tpope/vim-sleuth'
 
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'honza/vim-snippets'
-" NeoBundle 'Lokaltog/vim-powerline' abandoned!
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'yurifury/hexHighlight'
 NeoBundle 'laurentgoudet/vim-howdoi'
@@ -77,6 +77,9 @@ NeoBundle 'wting/rust.vim'
 
 " python
 NeoBundle 'tshirtman/vim-cython'
+
+" z3
+NeoBundle 'raichoo/smt-vim'
 
 call neobundle#end()
 
