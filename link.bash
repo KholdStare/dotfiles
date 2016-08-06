@@ -99,10 +99,10 @@ for file in $COPIED_FILES; do
 done
 
 # Bootstrap vim
-if [[ ! -e "${HOME}/.vim/bundle/neobundle.vim" ]]; then
+if [[ ! -e "${HOME}/.vim/autoload/plug.vim" ]]; then
     echo "BOOTSTRAPPING vim"
-    mkdir -p ~/.vim/bundle
-    git clone git://github.com/Shougo/neobundle.vim ${HOME}/.vim/bundle/neobundle.vim
+    curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 
 # Fix cabal config paths

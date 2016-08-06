@@ -1,100 +1,55 @@
-if has('vim_starting')
-    set nocompatible
+call plug#begin()
 
-    " Required
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
+if has('nvim')
+  Plug 'ctrlpvim/ctrlp.vim'
+else
+  Plug 'wincent/Command-T', { 'do': 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t' }
 endif
 
-let g:neobundle_default_git_protocol="git"
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-sleuth'
 
-" Required
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
-" Required
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" By the power of Shougo!
-NeoBundle 'Shougo/vimproc', {
-      \ 'build' : {
-      \     'windows' : 'make -f make_mingw32.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-"NeoBundle 'Shougo/neocomplete.vim'
-
-NeoBundle 'wincent/Command-T', {
-      \ 'build' : {
-      \     'unix' : 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t',
-      \     'mac' : 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t',
-      \    },
-      \ }
-
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'tpope/vim-abolish'
-NeoBundle 'tpope/vim-sleuth'
-
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'bling/vim-airline'
-NeoBundle 'yurifury/hexHighlight'
-NeoBundle 'laurentgoudet/vim-howdoi'
-NeoBundle 'nelstrom/vim-markdown-folding'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'godlygeek/tabular'
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'bling/vim-airline'
+Plug 'yurifury/hexHighlight', { 'for': 'css' }
+Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
+Plug 'majutsushi/tagbar'
+Plug 'godlygeek/tabular'
 
 " Colorscheme
-NeoBundle 'xoria256.vim'
+Plug 'xoria256.vim'
 
-" For automatically marking scripts as executable
-NeoBundle 'Shebang'
 " Provides :BD to close a buffer without closing the window
-NeoBundle 'bufkill.vim'
+Plug 'bufkill.vim'
 
-NeoBundle 'NERD_tree-Project'
-NeoBundle 'a.vim'
-NeoBundle 'opencl.vim'
+Plug 'NERD_tree-Project'
+Plug 'a.vim'
+Plug 'opencl.vim'
 
 " haskell
-NeoBundle 'eagletmt/neco-ghc'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'Twinside/vim-haskellConceal'
+"Plug 'eagletmt/neco-ghc'
+"Plug 'eagletmt/ghcmod-vim'
+"Plug 'Twinside/vim-haskellConceal'
 
 " idris
-NeoBundle 'idris-hackers/idris-vim'
+Plug 'idris-hackers/idris-vim'
 
 " rust
-NeoBundle 'wting/rust.vim'
+Plug 'wting/rust.vim'
 
 " python
-NeoBundle 'tshirtman/vim-cython'
+Plug 'tshirtman/vim-cython'
 
 " z3
-NeoBundle 'raichoo/smt-vim'
+Plug 'raichoo/smt-vim'
 
-call neobundle#end()
-
-filetype plugin indent on     " required! 
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-
-"
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleSearch(!) foo - search(or refresh cache first) for foo
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..
+call plug#end()
