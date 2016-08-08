@@ -13,6 +13,6 @@ if [[ $# -lt 2 ]]; then
 fi
 
 PATH_TO_BINARY=$1
-FUNCTION=$2
+FUNCTION="$2"
 
 gdb -batch -ex "file ${PATH_TO_BINARY}" -ex "disassemble ${FUNCTION}"
