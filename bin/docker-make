@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+set -u
+
+IMAGE=$1
+shift
+
+TOPLEVEL_GIT_DIR=$(git rev-parse --show-toplevel)
+
+# start rdm if not already running
+if ! pidof rdm > /dev/null; then
+    nohup rdm > ${TOPLEVEL_GIT_DIR}/rdm.log &
+fi
+
+# use bear to store compilation database at git root
+docker-run ${IMAGE} \
+    bear -o ${TOPLEVEL_GIT_DIR}/compile_commands.json --append \
+    make $@
+
+# update rdm with compilation db
+rc -J ${TOPLEVEL_GIT_DIR}

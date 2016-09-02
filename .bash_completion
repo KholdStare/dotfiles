@@ -4,3 +4,4 @@ source ~/bin/util-make-completion-wrapper.sh
 
 make-completion-wrapper _docker _docker_run_complete docker run
 complete -F _docker_run_complete docker-run
+complete -F _docker_run_complete docker-make
