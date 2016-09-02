@@ -21,4 +21,27 @@
 
 (desktop-save-mode 1)
 
+;; indentation defaults
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq-default c-basic-offset 4)
+(setq-default py-indent-offset 4)
+
+;; Enable mouse support
+(unless window-system
+  (require 'mouse)
+  (xterm-mouse-mode t)
+  (global-set-key [mouse-4] (lambda ()
+                              (interactive)
+                              (scroll-down 1)))
+  (global-set-key [mouse-5] (lambda ()
+                              (interactive)
+                              (scroll-up 1)))
+  (defun track-mouse (e))
+  (setq mouse-sel-mode t)
+)
+
+;; Consider .h files c++
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
 (provide 'general-init)
