@@ -24,8 +24,27 @@
 ;; indentation defaults
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
-(setq-default c-basic-offset 4)
 (setq-default py-indent-offset 4)
+
+(defun my-c-mode-common-hook ()
+  (c-set-offset 'substatement-open 0)
+  ;; other customizations can go here
+
+  (setq c++-tab-always-indent t)
+  (setq c-basic-offset 4)
+  (setq c-indent-level 4)
+
+  (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60))
+  (setq tab-width 4)
+
+  (c-set-offset 'arglist-intro '+)
+  (c-set-offset 'arglist-close 0)
+  )
+
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;; truncate, don't wrap by default
+(setq-default truncate-lines t)
 
 ;; Enable mouse support
 (unless window-system

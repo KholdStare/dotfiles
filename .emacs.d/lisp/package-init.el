@@ -12,6 +12,7 @@
   '(evil
     evil-surround
     evil-leader
+    evil-visualstar
     magit
     evil-magit
     neotree
@@ -28,6 +29,7 @@
     ; dtrt-indent
     ))
 
+(setq evil-search-module 'evil-search)
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p))

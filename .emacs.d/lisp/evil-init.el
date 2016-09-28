@@ -14,6 +14,10 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 
+;; words are symbols (gets around annoying _ problem when using w and b
+(with-eval-after-load 'evil
+  (defalias #'forward-evil-word #'forward-evil-symbol))
+
 (define-key evil-normal-state-map (kbd "C-]")
   (lambda () (interactive)
     (if (bound-and-true-p c++-mode)
