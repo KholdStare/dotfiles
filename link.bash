@@ -51,7 +51,7 @@ function backup_file() {
 }
 
 LINKED_FILES=".bashrc .bash_profile .bash_completion .gitconfig .git_template 
-    .tmux.conf .vimrc .gvimrc .ghci .emacs.d/* bin/* .stack/*"
+    .tmux.conf .vimrc .gvimrc .ghci .spacemacs bin/* .stack/*"
 COPIED_FILES=".cabal/config"
 
 chmod u+x bin/*
@@ -107,6 +107,12 @@ if [[ ! -e "${HOME}/.vim/autoload/plug.vim" ]]; then
     mkdir -p ${HOME}/.config
     ln -s ${HOME}/.vim ${HOME}/.config/nvim
     ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
+fi
+
+# Bootstrap spacemacs
+if [[ ! -e "${HOME}/.emacs.d/spacemacs.mk" ]]; then
+    echo "BOOTSTRAPPING spacemacs"
+    git clone https://github.com/syl20bnr/spacemacs ${HOME}/.emacs.d
 fi
 
 # Fix cabal config paths
