@@ -43,6 +43,9 @@ Plug 'opencl.vim'
 " idris
 Plug 'idris-hackers/idris-vim'
 
+" nim
+Plug 'zah/nim.vim'
+
 " rust
 Plug 'wting/rust.vim'
 
