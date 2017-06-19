@@ -58,3 +58,14 @@
     templatedir = ~/.git_template
 [diff]
     algorithm = patience
+[branch "master"]
+    rebase = true
+[core]
+    fileMode = false
+    ignorecase = true
+    autoclrf = true
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
