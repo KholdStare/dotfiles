@@ -39,6 +39,7 @@
   "ri" 'rtags-symbol-info
   "wt" 'whitespace-mode
   "wo" 'whitespace-toggle-options)
+(add-hook 'rtags-jump-hook 'evil--jumps-push)
 
 (evil-ex-define-cmd "BD" 'kill-this-buffer)
 

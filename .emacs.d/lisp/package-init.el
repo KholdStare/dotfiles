@@ -26,6 +26,7 @@
     ido-vertical-mode
     flx-ido
     fzf
+    cmake-mode
     ; dtrt-indent
     ))
 
