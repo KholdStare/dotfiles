@@ -99,6 +99,7 @@ fi
 # Paths
 # ========================================
 export PATH=$HOME/tools/bin:$PATH
+export LD_LIBRARY_PATH=${HOME}/tools/lib:${LD_LIBRARY_PATH}
 export PATH=$HOME/.cabal/bin:$PATH
 export PATH=$HOME/bin:$PATH
 
