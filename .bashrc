@@ -95,14 +95,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# ========================================
-# Paths
-# ========================================
-export PATH=$HOME/tools/bin:$PATH
-export LD_LIBRARY_PATH=${HOME}/tools/lib:${LD_LIBRARY_PATH}
-export PATH=$HOME/.cabal/bin:$PATH
-export PATH=$HOME/bin:$PATH
-
 # RVM
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
@@ -121,9 +113,3 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 export EDITOR=vim
-
-# ========================================
-# Customization
-# ========================================
-# source a custom local bash configuration if one exists
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
