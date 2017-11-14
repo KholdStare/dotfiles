@@ -1,9 +1,10 @@
 #!/bin/bash
 # creates links in the parent directory to all dotfiles in this directory.
-# HAS to be run in this directory
 
 set -e
 set -u
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 COMMAND=""
 if [[ $# -gt 0 ]]; then
@@ -11,11 +12,6 @@ if [[ $# -gt 0 ]]; then
 fi
 
 OS=$(uname)
-
-# e.g.Turns ".cabal/config" into "../"
-function to_breadcrumbs() {
-    echo "$1" | sed -e 's@[^/]@@g' -e 's@/@../@g'
-}
 
 function get_link_path() {
     FILENAME=$1
@@ -29,16 +25,16 @@ function get_link_path() {
 }
 
 function get_target_for_file() {
-    echo $(to_breadcrumbs $1)dotfiles/$1
+    echo ${SCRIPT_DIR}/$1
 }
 
 function create_link() {
     FILENAME=$1
     TARGET=$(get_target_for_file ${FILENAME})
-    LINKNAME=../${FILENAME}
+    LINKNAME=${HOME}/${FILENAME}
 
     echo LINKING ${FILENAME}
-    mkdir -p ../$(dirname ${FILENAME})
+    mkdir -p ${HOME}/$(dirname ${FILENAME})
     ln -s ${TARGET} ${LINKNAME}
 }
 
@@ -64,8 +60,8 @@ chmod u+x bin/*
 
 for file in $LINKED_FILES; do
 
-    TARGET=$(to_breadcrumbs $file)dotfiles/$file
-    LINKNAME=../$file
+    TARGET=${SCRIPT_DIR}/$file
+    LINKNAME=${HOME}/$file
     CREATE_LINK=0
 
     if [[ -e ${LINKNAME} ]]; then
@@ -95,11 +91,11 @@ for file in $LINKED_FILES; do
     fi
 done
 
-for file in $COPIED_FILES; do
-    if [[ ! -e ../$file ]]; then
+for file in ${COPIED_FILES}; do
+    if [[ ! -e ${HOME}/$file ]]; then
         echo COPYING $file
-        mkdir -p ../$(dirname ${file})
-        cp $file ../$file;
+        mkdir -p ${HOME}/$(dirname ${file})
+        cp ${SCRIPT_DIR}/$file ${HOME}/$file;
     else
         echo COPY $file already exists
     fi
@@ -124,4 +120,4 @@ if [[ -e "${CABAL_CONFIG_FILE}" ]]; then
 fi
 
 # Fix warning from ghci complaining it is writable
-chmod g-w .ghci
+chmod g-w ${SCRIPT_DIR}/.ghci
