@@ -26,14 +26,14 @@ Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 
 " Colorscheme
-Plug 'xoria256.vim'
+Plug 'vim-scripts/xoria256.vim'
 
 " Provides :BD to close a buffer without closing the window
-Plug 'bufkill.vim'
+Plug 'vim-scripts/bufkill.vim'
 
-Plug 'NERD_tree-Project'
-Plug 'a.vim'
-Plug 'opencl.vim'
+Plug 'vim-scripts/NERD_tree-Project'
+Plug 'vim-scripts/a.vim'
+Plug 'vim-scripts/opencl.vim'
 
 " haskell
 "Plug 'eagletmt/neco-ghc'
