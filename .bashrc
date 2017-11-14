@@ -5,6 +5,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+if [ -f ~/.bash_profile ]; then
+    . ~/.bash_profile
+fi
+
 # ========================================
 # General settings
 # ========================================
@@ -121,8 +125,4 @@ export EDITOR=vim
 # Customization
 # ========================================
 # source a custom local bash configuration if one exists
-if [ -f ~/.bash_local ]; then
-    . ~/.bash_local
-fi
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
