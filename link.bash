@@ -6,6 +6,8 @@ set -u
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+pushd ${SCRIPT_DIR} > /dev/null
+
 COMMAND=""
 if [[ $# -gt 0 ]]; then
     COMMAND=$1
@@ -43,7 +45,7 @@ function backup_file() {
     TIMESTAMP=$(date +'%Y.%m.%d')
     BACKUP_NAME=${FILENAME}.${TIMESTAMP}.bak
     echo BACK UP ${FILENAME} to ${BACKUP_NAME}
-    cp ${FILENAME} ${BACKUP_NAME}
+    cp -r ${FILENAME} ${BACKUP_NAME}
 }
 
 # Bootstrap spacemacs
@@ -56,7 +58,7 @@ LINKED_FILES=".bashrc .bash_profile .bash_completion .gitconfig .git_template
     .tmux.conf .vimrc .gvimrc .ghci .spacemacs bin/* .stack/*"
 COPIED_FILES=".cabal/config"
 
-chmod u+x bin/*
+chmod u+x ${SCRIPT_DIR}/bin/*
 
 for file in $LINKED_FILES; do
 
@@ -121,3 +123,5 @@ fi
 
 # Fix warning from ghci complaining it is writable
 chmod g-w ${SCRIPT_DIR}/.ghci
+
+popd > /dev/null

@@ -1,3 +1,5 @@
 #!/bin/bash
 
-./link.bash force
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+${SCRIPT_DIR}/link.bash force
