@@ -195,8 +195,10 @@ nmap <leader>r yiw:%s/"//g<Left><Left>
 vmap <leader>r y:%s/"//g<Left><Left>
 
 " Visually selected text also yanked into clipboard
-vnoremap y ygv"+y
-vnoremap Y Ygv"+Y
+if has("clipboard")
+  vnoremap y ygv"+y
+  vnoremap Y Ygv"+Y
+endif
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
