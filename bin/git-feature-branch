@@ -1,0 +1,20 @@
+#!/bin/bash
+# Author: Alexander Kondratskiy
+
+set -e
+set -u
+
+USAGE="Create a new branch and switch to it, or move an existing feature branch to HEAD and switch to it
+
+Usage:
+    git feature-branch branch"
+
+BRANCH_NAME=$1
+
+if git rev-parse --verify -q ${BRANCH_NAME} > /dev/null; then
+    git-relocate-branch ${BRANCH_NAME} HEAD
+else
+    git branch ${BRANCH_NAME}
+fi
+
+git checkout ${BRANCH_NAME}
