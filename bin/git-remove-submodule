@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -e
+set -u
+
+SUBMODULE_PATH=${1}
+
+# Should be done from root of repo
+
+git rm "${SUBMODULE_PATH}"
+rm -rf ".git/modules/${SUBMODULE_PATH}"
+git config -f ".git/config" --remove-section "submodule.${SUBMODULE_PATH}" 2> /dev/null
