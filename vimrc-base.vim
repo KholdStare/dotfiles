@@ -41,7 +41,7 @@ set smartcase
 set incsearch
 
 " remap leader
-let mapleader = ","
+let mapleader = " "
 
 " sets the title of the shell to the curretly opened file
 set title

@@ -13,6 +13,12 @@ source ~/dotfiles/vimrc-base.vim
 " Custom mappings for plugins
 "-----------------------------------------------------------------------------
 
+" Ctrl-{hjkl} for navigating out of terminal panes
+tnoremap <C-h> <C-\><C-n><C-w>h
+tnoremap <C-j> <C-\><C-n><C-w>j
+tnoremap <C-k> <C-\><C-n><C-w>k
+tnoremap <C-l> <C-\><C-n><C-w>l
+
 " Bubble single lines
 nmap <C-Up> [e
 nmap <C-Down> ]e
@@ -25,16 +31,53 @@ map <silent> <F6> :ToggleNERDTree<CR>
 map <silent> <F7> :TagbarToggle<CR>
 
 " Get Stack Overflow code snippets
-map <Leader>so <Plug>Howdoi
+map <leader>so <Plug>Howdoi
 
 " Switch between complementary filetypes
 " mnemonic: Go Switch
 nnoremap gs :A<CR>
 
-" Insert type for haskell function definition
-nnoremap <Leader>ht :GhcModTypeInsert<CR>
-nnoremap <Leader>he :GhcModType<CR>
-nnoremap <leader>hc :nohl<CR>:GhcModTypeClear<CR><C-L>
+"-----------------------------------------------------------------------------
+" Haskell
+"-----------------------------------------------------------------------------
+
+augroup interoMaps
+  au!
+  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
+
+  " Background process and window management
+  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
+  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+
+  " Open intero/GHCi split horizontally
+  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
+  " Open intero/GHCi split vertically
+  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
+  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+
+  " Reloading (pick one)
+  " Automatically reload on save
+  au BufWritePost *.hs InteroReload
+  " Manually save and reload
+  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
+
+  " Load individual modules
+  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
+  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+
+  " Type-related information
+  " Heads up! These next two differ from the rest.
+  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
+  au FileType haskell map <silent> <leader>T <Plug>InteroType
+  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
+
+  " Navigation
+  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
+
+  " Managing targets
+  " Prompts you to enter targets (no silent):
+  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
+augroup END
 
 "-----------------------------------------------------------------------------
 " Plugin preferences
@@ -45,27 +88,21 @@ colorscheme xoria256
 " ultisnips snippet location
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
 
+" Neomake
+call neomake#configure#automake('w')
+let g:neomake_haskell_enabled_makers = []
+
 " Use unicode symbols for powerline
-let g:Powerline_symbols="unicode"
+" let g:Powerline_symbols="unicode"
 
 " Autocomplete menu options
 set completeopt=longest,menuone
 
 "-----------------------------------------------------------------------------
-" Command-T
+" Fuzzy Search
 "-----------------------------------------------------------------------------
-nnoremap [commandt] <Nop>
-nmap <Space> [commandt]
-
-nnoremap <silent>[commandt]<Space> :CommandT<CR>
-nmap <C-p> [commandt]<Space>
-nmap <Leader>t [commandt]<Space>
-
-nnoremap <silent>[commandt]b :CommandTBuffer<CR>
-nnoremap <silent>[commandt]f :CommandTJump<CR>
-
-let g:CommandTFileScanner="watchman"
-let g:CommandTMaxFiles=100000
+nnoremap <silent><Leader>ff :FZF<CR>
+nnoremap <silent><Leader>bb :Buffers<CR>
 
 "-----------------------------------------------------------------------------
 " Fugitive (Git plugin)
@@ -80,6 +117,9 @@ if has("autocmd")
     " Automatically close hidden fugitive files. less buffer clutter
     autocmd BufReadPost fugitive://* set bufhidden=delete
 endif
+
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gb :Gblame<CR>
 
 "-----------------------------------------------------------------------------
 " Neocomplete
@@ -131,9 +171,15 @@ endif
 "-----------------------------------------------------------------------------
 
 " C++
-let g:syntastic_cpp_compiler_options = ' -Wall -Werror -std=c++1y'
+let g:syntastic_cpp_compiler_options = '-Wall -Werror -std=c++17'
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
+
+let g:neomake_cpp_enabled_makers = ['clang']
+let g:neomake_cpp_clang_maker = {
+   \ 'exe': 'clang++',
+   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic', '-Wno-sign-conversion'],
+   \ }
 
 " Haskell
 let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds -g -fwarn-incomplete-patterns'

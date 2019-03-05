@@ -1,23 +1,24 @@
 call plug#begin()
 
-if has('nvim')
-  Plug 'ctrlpvim/ctrlp.vim'
-else
-  Plug 'wincent/Command-T', { 'do': 'ruby ruby/command-t/extconf.rb && mv Makefile ruby/command-t && make -C ruby/command-t' }
-endif
+" fuzzy search
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic'
+if has('nvim')
+    Plug 'neomake/neomake'
+else
+    Plug 'scrooloose/syntastic'
+endif
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-sleuth'
+Plug 'airblade/vim-gitgutter'
 
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-airline'
 Plug 'yurifury/hexHighlight', { 'for': 'css' }
@@ -36,8 +37,10 @@ Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/opencl.vim'
 
 " haskell
-"Plug 'eagletmt/neco-ghc'
-"Plug 'eagletmt/ghcmod-vim'
+if has('nvim')
+    Plug 'neovimhaskell/haskell-vim'
+endif
+Plug 'parsonsmatt/intero-neovim'
 "Plug 'Twinside/vim-haskellConceal'
 
 " idris
