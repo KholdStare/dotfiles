@@ -15,4 +15,4 @@ fi
 PATH_TO_BINARY=$1
 FUNCTION="$2"
 
-gdb -batch -ex "file ${PATH_TO_BINARY}" -ex "disassemble ${FUNCTION}"
+gdb -batch -ex "set disassembly-flavor intel" -ex "file ${PATH_TO_BINARY}" -ex "disassemble ${FUNCTION}"
