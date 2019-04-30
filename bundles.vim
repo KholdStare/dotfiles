@@ -2,7 +2,16 @@ call plug#begin()
 
 " fuzzy search
 Plug '/usr/local/opt/fzf'
+Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
+" {{{
+"augroup fzf_group
+"    autocmd FileType fzf nnoremap <buffer> <C-h> <C-h>
+"    autocmd FileType fzf nnoremap <buffer> <C-j> <C-j>
+"    autocmd FileType fzf nnoremap <buffer> <C-k> <C-k>
+"    autocmd FileType fzf nnoremap <buffer> <C-l> <C-l>
+"augroup END
+" }}}
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'

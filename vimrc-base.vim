@@ -127,10 +127,18 @@ nmap <C-@><C-@> :cs find s <C-R>=expand("<cword>")<CR><CR>
 " Movement preferences
 "-----------------------------------------------------------------------------
 " Window movement command mapping
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-l> <C-w>l
+"
+"" Ctrl-{hjkl} for navigating out of terminal panes
+"if has('nvim')
+"  tnoremap <C-h> <C-\><C-n><C-w>h
+"  tnoremap <C-j> <C-\><C-n><C-w>j
+"  tnoremap <C-k> <C-\><C-n><C-w>k
+"  tnoremap <C-l> <C-\><C-n><C-w>l
+"endif
 
 " Keep selection after indenting
 vnoremap > >gv
