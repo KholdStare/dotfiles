@@ -1,13 +1,12 @@
+"-----------------------------------------------------------------------------
+" General
+"-----------------------------------------------------------------------------
+source ~/dotfiles/vimrc-base.vim
 
 "-----------------------------------------------------------------------------
 " NeoBundle (Plugins)
 "-----------------------------------------------------------------------------
 source ~/dotfiles/bundles.vim
-
-"-----------------------------------------------------------------------------
-" General
-"-----------------------------------------------------------------------------
-source ~/dotfiles/vimrc-base.vim
 
 "-----------------------------------------------------------------------------
 " Custom mappings for plugins
@@ -91,52 +90,6 @@ let g:neomake_haskell_enabled_makers = []
 
 " Autocomplete menu options
 set completeopt=longest,menuone
-
-"-----------------------------------------------------------------------------
-" Fuzzy Search
-"-----------------------------------------------------------------------------
-nnoremap <silent><Leader>ff :FZF<CR>
-nnoremap <silent><Leader>bb :Buffers<CR>
-
-"-----------------------------------------------------------------------------
-" Fugitive (Git plugin)
-"-----------------------------------------------------------------------------
-if has("autocmd")
-    " Use .. to navigate up a tree when browsing fugitive history
-    autocmd User fugitive
-      \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
-      \   nnoremap <buffer> .. :edit %:h<CR> |
-      \ endif
-
-    " Automatically close hidden fugitive files. less buffer clutter
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-endif
-
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gb :Gblame<CR>
-
-"-----------------------------------------------------------------------------
-" Neocomplete
-"-----------------------------------------------------------------------------
-"source ~/dotfiles/neco-rc.vim
-
-"-----------------------------------------------------------------------------
-" Airline
-"-----------------------------------------------------------------------------
-let g:airline_theme = 'bubblegum'
-
-if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-endif
-
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-let g:airline_symbols.paste = 'ρ'
 
 "-----------------------------------------------------------------------------
 " Tagbar

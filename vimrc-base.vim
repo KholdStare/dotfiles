@@ -99,6 +99,15 @@ set showmatch
 set foldmethod=syntax
 set foldnestmax=2
 set foldlevelstart=99
+augroup ft_vim
+  au!
+  au FileType vim setlocal foldmethod=marker
+augroup END
+
+" open files relative to current
+if exists('+autochdir')
+  set autochdir
+endif
 
 " Handle mouse events better through ssh/tmux
 if !has('nvim')
@@ -168,9 +177,11 @@ set virtualedit=block
 set autoindent
 set smartindent
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+set cino=N-s
+set cino=i0
 filetype indent plugin on
 
 " Shortcut to rapidly toggle `set list` for looking at indentation
