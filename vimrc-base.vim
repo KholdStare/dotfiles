@@ -127,7 +127,7 @@ set tags+=./tags;/
 
 " Show list of possible tags if more than one,
 " otherwise jump directly
-nnoremap <C-]> g<C-]>
+" nnoremap <C-]> g<C-]>
 
 " Use Ctrl-space Ctrl-space to look up usage using cscope
 nmap <C-@><C-@> :cs find s <C-R>=expand("<cword>")<CR><CR>

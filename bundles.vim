@@ -57,11 +57,7 @@ nnoremap <silent><Leader>bb :Buffers<CR>
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-if has('nvim')
-    Plug 'neomake/neomake'
-else
-    Plug 'scrooloose/syntastic'
-endif
+
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 " {{{
@@ -105,7 +101,6 @@ let g:airline_symbols.paste = 'ρ'
 " }}}
 Plug 'yurifury/hexHighlight', { 'for': 'css' }
 Plug 'nelstrom/vim-markdown-folding', { 'for': 'markdown' }
-Plug 'majutsushi/tagbar'
 Plug 'godlygeek/tabular'
 
 " Colorscheme
@@ -118,12 +113,58 @@ Plug 'vim-scripts/NERD_tree-Project'
 Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/opencl.vim'
 
+" c++
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" {{{
+function! s:ConfigureCoc()
+  call coc#config('coc.preferences', {
+      \ "languageserver": {
+      \   "ccls": {
+      \     "command": "ccls",
+      \     "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+      \     "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      \     "initializationOptions": {
+      \       "cache": {
+      \          "directory": ".ccls-cache"
+      \       }
+      \     }
+      \   }
+      \ }
+      \})
+endfunction
+autocmd! User coc.nvim call s:ConfigureCoc
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+nmap <silent> <C-]> <Plug>(coc-definition)
+nmap <silent><Leader>gd <Plug>(coc-definition)
+nmap <silent><Leader>gi <Plug>(coc-implemetation)
+nmap <silent><Leader>gr <Plug>(coc-references)
+nmap <Leader>rn <Plug>(coc-rename)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+" }}}
+
 " haskell
 if has('nvim')
-    Plug 'neovimhaskell/haskell-vim'
+  Plug 'neovimhaskell/haskell-vim'
+  Plug 'parsonsmatt/intero-neovim'
 endif
-Plug 'parsonsmatt/intero-neovim'
-"Plug 'Twinside/vim-haskellConceal'
 
 " idris
 Plug 'idris-hackers/idris-vim'

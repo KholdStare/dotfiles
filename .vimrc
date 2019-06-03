@@ -81,13 +81,6 @@ colorscheme xoria256
 " ultisnips snippet location
 let g:UltiSnipsSnippetsDir="~/.vim/bundle/ultisnips/UltiSnips"
 
-" Neomake
-call neomake#configure#automake('w')
-let g:neomake_haskell_enabled_makers = []
-
-" Use unicode symbols for powerline
-" let g:Powerline_symbols="unicode"
-
 " Autocomplete menu options
 set completeopt=longest,menuone
 
@@ -112,28 +105,6 @@ if has("autocmd")
     " disable plugins/features that fail on large files
     autocmd BufNewFile,BufReadPost *.h call TurnOffTaxingFeaturesIfLargeFile()
 endif
-
-"-----------------------------------------------------------------------------
-" Syntastic
-"-----------------------------------------------------------------------------
-
-" C++
-let g:syntastic_cpp_compiler_options = '-Wall -Werror -std=c++17'
-let g:syntastic_cpp_compiler = 'g++'
-let g:syntastic_cpp_include_dirs = [ '/usr/include/qt4/Qt', '/usr/include/qt4', '/usr/include/qt4/QtGui', '/usr/include/qt4/QtCore' ]
-
-let g:neomake_cpp_enabled_makers = ['clang']
-let g:neomake_cpp_clang_maker = {
-   \ 'exe': 'clang++',
-   \ 'args': ['-Wall', '-Wextra', '-Weverything', '-pedantic', '-Wno-sign-conversion'],
-   \ }
-
-" Haskell
-let g:syntastic_haskell_ghc_mod_args = '-g -fno-warn-unused-binds -g -fwarn-incomplete-patterns'
-let g:syntastic_haskell_hlint_args = '--ignore="Redundant bracket"'
-
-" Python
-let g:syntastic_python_checkers = ['python', 'flake8']
 
 " extra custom vim settings for current dir
 if filereadable(".custom.vim")

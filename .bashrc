@@ -112,6 +112,9 @@ if [ -d "${PYENV_ROOT}" ]; then
     eval "$(pyenv init -)"
 fi
 
+" yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
 export EDITOR=vim
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
