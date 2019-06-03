@@ -104,11 +104,6 @@ augroup ft_vim
   au FileType vim setlocal foldmethod=marker
 augroup END
 
-" open files relative to current
-if exists('+autochdir')
-  set autochdir
-endif
-
 " Handle mouse events better through ssh/tmux
 if !has('nvim')
   set ttymouse=xterm2
@@ -128,9 +123,6 @@ set tags+=./tags;/
 " Show list of possible tags if more than one,
 " otherwise jump directly
 " nnoremap <C-]> g<C-]>
-
-" Use Ctrl-space Ctrl-space to look up usage using cscope
-nmap <C-@><C-@> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
 "-----------------------------------------------------------------------------
 " Movement preferences
@@ -184,8 +176,8 @@ set cino=N-s
 set cino=i0
 filetype indent plugin on
 
-" Shortcut to rapidly toggle `set list` for looking at indentation
-nmap <leader>l :set list!<CR>
+" Shortcut to rapidly Toggle Whitespace - `set list` for looking at indentation
+nmap <leader>tw :set list!<CR>
  
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
@@ -242,14 +234,6 @@ if has("autocmd")
     autocmd! BufRead,BufNewFile *.cl set filetype=opencl
     " SConstruct filetype detection
     autocmd! BufRead,BufNewFile SConstruct set filetype=python
-endif
-
-"-----------------------------------------------------------------------------
-" Custom settings depending on local environment
-"-----------------------------------------------------------------------------
-" Use scons
-if filereadable("SConstruct")
-    set makeprg=scons
 endif
 
 "-----------------------------------------------------------------------------

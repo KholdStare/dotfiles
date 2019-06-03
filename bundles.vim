@@ -13,7 +13,7 @@ Plug 'junegunn/fzf.vim'
 "    autocmd FileType fzf nnoremap <buffer> <C-l> <C-l>
 "augroup END
 function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+  return system('git rev-parse --show-toplevel 2> /dev/null || pwd')[:-2]
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
@@ -23,36 +23,42 @@ let g:rg_command = '
   \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,h,hpp,cc,hh,go,hs,rb,conf,txt,yaml,cmake}"
   \ -g "!{.git,node_modules,vendor,build-*}/*" '
 
-command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, <bang>0)
+command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, {'dir': s:find_git_root()}, <bang>0)
 
 if has('nvim')
-  function! s:fzf_cd_helper(path)
-    if isdirectory(a:path)
+  function! s:fzf_cd_helper(path, is_recursive)
+    let resolved_path = resolve(a:path)
+    let simple_path = fnamemodify(resolved_path, ":~:.")
+    if isdirectory(resolved_path)
+      let ls_command = 'ls -ap --color=always --group-directories-first'
+      let preview_command_format = '
+          \ __cd_nxt="$(echo {})";
+          \ __cd_path="$(echo %s/${__cd_nxt} | sed "s;//;/;")";
+          \ echo -e "\033[1m%s/${__cd_nxt}\033[0m"; echo;
+          \ if [[ -d ${__cd_path} ]]; then %s "${__cd_path}"; else head "${__cd_path}"; fi\'
+      let preview_command = printf(preview_command_format, simple_path, resolved_path, ls_command)
       call fzf#run({
-          \ 'dir': a:path,
-          \ 'source': 'ls -ap --color=always | grep --color=always -v ''^.$''',
-          \ 'sink*': {lines -> s:fzf_cd_helper(lines[0])},
+          \ 'source': printf('%s %s | tail -n +2', ls_command, resolved_path),
+          \ 'sink*': {lines -> s:fzf_cd_helper(resolved_path . '/' . lines[0], 1)},
           \ 'down': '30%',
           \ 'options':
-          \ ['--ansi', '--reverse', '--preview', '
-              \ __cd_nxt="$(echo {})";
-              \ __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
-              \ echo $__cd_path; echo;
-              \ if [[ -d ${__cd_path} ]]; then ls -p --color=always "${__cd_path}"; else head "${__cd_path}"; fi\'
-          \ ]
+          \ ['--ansi', '--reverse', '--preview', preview_command]
           \ })
+      if a:is_recursive
+        call feedkeys('i', 'n')
+      endif
     else
-      execute "edit " . a:path
+      execute "edit " . simple_path
     endif
   endfunction
 
-  command! -bang FzfCd call s:fzf_cd_helper('.')
+  command! -bang FzfCd call s:fzf_cd_helper(expand('%:p:h'), 0)
 
   nnoremap <silent><Leader>fe :FzfCd<CR>
 endif
 
 nnoremap <silent><Leader>ff :ProjectFiles<CR>
-nnoremap <silent><Leader>bb :Buffers<CR>
+nnoremap <silent><Leader>bb :History<CR>
 " }}}
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -105,12 +111,12 @@ Plug 'godlygeek/tabular'
 
 " Colorscheme
 Plug 'vim-scripts/xoria256.vim'
+Plug 'liuchengxu/space-vim-theme'
 
 " Provides :BD to close a buffer without closing the window
 Plug 'vim-scripts/bufkill.vim'
 
 Plug 'vim-scripts/NERD_tree-Project'
-Plug 'vim-scripts/a.vim'
 Plug 'vim-scripts/opencl.vim'
 
 " c++
