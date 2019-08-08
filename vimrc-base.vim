@@ -40,6 +40,9 @@ set ignorecase
 set smartcase
 set incsearch
 
+" automatically reload file if written outside
+set autoread
+
 " remap leader
 let mapleader = " "
 

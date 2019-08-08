@@ -20,8 +20,8 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 let g:rg_command = '
   \ rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --color "always"
-  \ -g "*.{js,json,php,md,styl,jade,html,config,py,cpp,c,h,hpp,cc,hh,go,hs,rb,conf,txt,yaml,cmake}"
-  \ -g "!{.git,node_modules,vendor,build-*}/*" '
+  \ -g "*.{js,json,xml,md,html,config,py,cpp,c,h,hpp,cc,hh,go,hs,rb,conf,txt,yaml,cmake,sql}"
+  \ -g "!{.git,.ccls-cache,node_modules,vendor,build-*}/*" '
 
 command! -bang -nargs=* Rg call fzf#vim#grep(g:rg_command .shellescape(<q-args>), 1, {'dir': s:find_git_root()}, <bang>0)
 
@@ -145,6 +145,19 @@ set updatetime=300
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 nmap <silent> <C-]> <Plug>(coc-definition)
 nmap <silent><Leader>gd <Plug>(coc-definition)
