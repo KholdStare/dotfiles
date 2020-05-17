@@ -33,9 +33,9 @@ if has('nvim')
       let ls_command = 'ls -ap --color=always --group-directories-first'
       let preview_command_format = '
           \ __cd_nxt="$(echo {})";
-          \ __cd_path="$(echo %s/${__cd_nxt} | sed "s;//;/;")";
+          \ __cd_path="$(echo %s/${__cd_nxt} | sed -e s!//!/!)";
           \ echo -e "\033[1m%s/${__cd_nxt}\033[0m"; echo;
-          \ if [[ -d ${__cd_path} ]]; then %s "${__cd_path}"; else head "${__cd_path}"; fi\'
+          \ if [[ -d ${__cd_path} ]]; then %s "${__cd_path}"; else head "${__cd_path}"; fi'
       let preview_command = printf(preview_command_format, simple_path, resolved_path, ls_command)
       call fzf#run({
           \ 'source': printf('%s %s | tail -n +2', ls_command, resolved_path),
