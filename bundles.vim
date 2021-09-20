@@ -3,8 +3,6 @@ call plug#begin()
 
 " fuzzy search
 Plug '/usr/local/opt/fzf'
-Plug '~/.fzf'
-Plug 'junegunn/fzf.vim'
 " {{{
 "augroup fzf_group
 "    autocmd FileType fzf nnoremap <buffer> <C-h> <C-h>
@@ -78,7 +76,7 @@ augroup fugitive_group
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gb :Gblame<CR>
 " }}}
 Plug 'tpope/vim-surround'
