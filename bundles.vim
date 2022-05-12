@@ -2,7 +2,8 @@
 call plug#begin()
 
 " fuzzy search
-Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " {{{
 "augroup fzf_group
 "    autocmd FileType fzf nnoremap <buffer> <C-h> <C-h>
@@ -77,7 +78,7 @@ augroup fugitive_group
 augroup END
 
 nnoremap <Leader>gs :Git<CR>
-nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gb :Git blame<CR>
 " }}}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -177,6 +178,12 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 " }}}
 
+" TOML
+Plug 'cespare/vim-toml', { 'branch': 'main' }
+
+" Solidity
+Plug 'tomlion/vim-solidity'
+
 " haskell
 if has('nvim')
   Plug 'neovimhaskell/haskell-vim'
@@ -197,5 +204,8 @@ Plug 'tshirtman/vim-cython'
 
 " z3
 Plug 'raichoo/smt-vim'
+
+" javascript/typescript
+Plug 'leafgarland/typescript-vim'
 
 call plug#end()

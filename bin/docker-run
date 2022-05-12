@@ -9,7 +9,7 @@ set +e
 docker run \
     --cidfile=${CONTAINER_ID_FILE} \
     -it \
-    -u ${USER} \
+    -u $(id -u ${USER}):$(id -g ${USER})
     -w ${PWD} \
     -v ${HOME}/workspace:${HOME}/workspace \
     -v ${HOME}/.ccache:${HOME}/.ccache \

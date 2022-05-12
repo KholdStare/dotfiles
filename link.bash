@@ -109,8 +109,8 @@ if [[ ! -e "${HOME}/.vim/autoload/plug.vim" ]]; then
     curl -fLo ${HOME}/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     mkdir -p ${HOME}/.config
-    ln -s ${HOME}/.vim ${HOME}/.config/nvim
-    ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
+    ln -s ../.vim ${HOME}/.config/nvim
+    ln -s ../.vimrc ${HOME}/.config/nvim/init.vim
 fi
 
 # Fix cabal config paths
