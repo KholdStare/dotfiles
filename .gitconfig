@@ -54,11 +54,11 @@
     assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
 
 # ========
-[init]
-    templatedir = ~/.git_template
 [diff]
     algorithm = patience
 [branch "master"]
+    rebase = true
+[branch "main"]
     rebase = true
 [core]
     fileMode = false
